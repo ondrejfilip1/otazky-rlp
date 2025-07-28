@@ -1,24 +1,29 @@
-import { StyleSheet, Text } from 'react-native'
-import React from 'react'
-import { Surface, Button } from 'react-native-paper'
-import { Link, useRouter } from 'expo-router';
+import { StyleSheet } from "react-native";
+import React from "react";
+import { Surface, Button } from "react-native-paper";
+import { useRouter } from "expo-router";
+import ThemedText from "./ThemedText";
 
 type LessonBoxProps = {
-    name: string;
-    lessonID: string;
-}
+  name: string;
+  lessonID: string;
+};
 
 const LessonBox = (props: LessonBoxProps) => {
-    const router = useRouter();
+  const router = useRouter();
   return (
-    <Surface style={{padding: 8}}>
-      <Text>{props.name}</Text>
-
-      <Button onPress={() => router.replace(`/lesson/${props.lessonID}`)}>Spustit lekci</Button>
+    <Surface style={{ padding: 12, borderRadius: 12 }}>
+      <ThemedText style={{ marginBottom: 12, fontSize: 16}}>{props.name}</ThemedText>
+      <Button
+        mode="contained"
+        onPress={() => router.replace(`/lesson/${props.lessonID}`)}
+      >
+        Spustit lekci
+      </Button>
     </Surface>
-  )
-}
+  );
+};
 
-export default LessonBox
+export default LessonBox;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

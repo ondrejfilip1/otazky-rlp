@@ -5,30 +5,26 @@ import "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import "@/global.css";
 
-//import { useColorScheme } from "@/hooks/useColorScheme";
+import { useColorScheme } from "@/hooks/useColorScheme";
 import { useEffect } from "react";
-import { MD3LightTheme, PaperProvider } from "react-native-paper";
+import { MD3DarkTheme, MD3LightTheme, PaperProvider } from "react-native-paper";
 
 export default function RootLayout() {
-  //const colorScheme = useColorScheme();
-  const paperTheme = {
+  const colorScheme = useColorScheme();
+
+  const lightTheme = {
     ...MD3LightTheme,
-    fonts: {
-      displayLarge: { fontFamily: "Inter", fontWeight: "400" },
-      displayMedium: { fontFamily: "Inter", fontWeight: "400" },
-      displaySmall: { fontFamily: "Inter", fontWeight: "400" },
-      headlineLarge: { fontFamily: "Inter", fontWeight: "400" },
-      headlineMedium: { fontFamily: "Inter", fontWeight: "400" },
-      headlineSmall: { fontFamily: "Inter", fontWeight: "400" },
-      titleLarge: { fontFamily: "Inter", fontWeight: "400" },
-      titleMedium: { fontFamily: "Inter", fontWeight: "400" },
-      titleSmall: { fontFamily: "Inter", fontWeight: "400" },
-      labelLarge: { fontFamily: "Inter", fontWeight: "400" },
-      labelMedium: { fontFamily: "Inter", fontWeight: "400" },
-      labelSmall: { fontFamily: "Inter", fontWeight: "400" },
-      bodyLarge: { fontFamily: "Inter", fontWeight: "400" },
-      bodyMedium: { fontFamily: "Inter", fontWeight: "400" },
-      bodySmall: { fontFamily: "Inter", fontWeight: "400" },
+    colors: {
+      ...MD3LightTheme.colors,
+      primary: "#155dfc",
+    },
+  };
+
+  const darkTheme = {
+    ...MD3DarkTheme,
+    colors: {
+      ...MD3DarkTheme.colors,
+      primary: "#3b82f6",
     },
   };
 
@@ -37,6 +33,8 @@ export default function RootLayout() {
   });
 
   const router = useRouter();
+
+  const theme = colorScheme === "dark" ? darkTheme : lightTheme;
 
   useEffect(() => {
     loadUsername();
@@ -53,7 +51,7 @@ export default function RootLayout() {
   }
 
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <Stack>
         <Stack.Screen name="welcome" options={{ headerShown: false }} />
         <Stack.Screen

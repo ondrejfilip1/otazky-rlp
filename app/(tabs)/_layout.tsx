@@ -1,7 +1,7 @@
 import { Tabs, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Platform } from "react-native";
-import { BookOpen } from "lucide-react-native";
+import { BookOpen, GraduationCap, House, User } from "lucide-react-native";
 
 import { HapticTab } from "@/components/HapticTab";
 import { IconSymbol } from "@/components/ui/IconSymbol";
@@ -11,11 +11,12 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const theme = Colors[colorScheme ?? "light"];
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: theme.tint,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
@@ -23,25 +24,28 @@ export default function TabLayout() {
           ios: {
             // Use a transparent background on iOS to show the blur effect
             position: "absolute",
+            backgroundColor: theme.background,
+            borderTopColor: theme.border
           },
-          default: {},
+          default: {
+            backgroundColor: theme.background,
+            borderTopColor: theme.border
+          },
         }),
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Domov",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
-          ),
+          title: "Lekce",
+          tabBarIcon: ({ color }) => <GraduationCap size={28} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="learn"
+        name="profile"
         options={{
-          title: "Lekce",
-          tabBarIcon: ({ color }) => <BookOpen size={28} color={color} />,
+          title: "Profil",
+          tabBarIcon: ({ color }) => <User size={28} color={color} />,
         }}
       />
     </Tabs>
