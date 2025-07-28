@@ -133,13 +133,6 @@
       "od2": "Roger",
       "od3": "Okay",
       "spr": "od2"
-    },
-    {
-      "ot": "Jaká zkratka označuje oblastní řídící středisko?",
-      "od1": "ACC",
-      "od2": "ATZ",
-      "od3": "FIS",
-      "spr": "od1"
     }
   ]
 }
