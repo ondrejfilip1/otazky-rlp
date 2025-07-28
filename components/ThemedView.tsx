@@ -1,14 +1,12 @@
-import { View, type ViewProps } from 'react-native';
+import { Text, View, ViewProps } from "react-native";
+import React, { PropsWithChildren } from "react";
 
-import { useThemeColor } from '@/hooks/useThemeColor';
-
-export type ThemedViewProps = ViewProps & {
-  lightColor?: string;
-  darkColor?: string;
+const ThemedView = ({ children, ...props }: PropsWithChildren<ViewProps>) => {
+  return (
+    <View {...props}>
+      <Text style={{ fontFamily: "Inter" }}>{children}</Text>
+    </View>
+  );
 };
 
-export function ThemedView({ style, lightColor, darkColor, ...otherProps }: ThemedViewProps) {
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
-
-  return <View style={[{ backgroundColor }, style]} {...otherProps} />;
-}
+export default ThemedView;

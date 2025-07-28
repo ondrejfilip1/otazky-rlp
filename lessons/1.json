@@ -1,0 +1,145 @@
+{
+  "nazev": "Řízení letového provozu - Základní znalosti",
+  "otazky": [
+    {
+      "ot": "Co je hlavní úlohou řízení letového provozu?",
+      "od1": "Zajišťovat bezpečnost, plynulost a efektivitu letového provozu",
+      "od2": "Kontrolovat pasy cestujících",
+      "od3": "Provádět údržbu letadel",
+      "spr": "od1"
+    },
+    {
+      "ot": "Jaká je zkratka pro řízení letového provozu?",
+      "od1": "ATP",
+      "od2": "ATC",
+      "od3": "ATS",
+      "spr": "od2"
+    },
+    {
+      "ot": "Jaký je primární komunikační jazyk v mezinárodním letectví?",
+      "od1": "Francouzština",
+      "od2": "Němčina",
+      "od3": "Angličtina",
+      "spr": "od3"
+    },
+    {
+      "ot": "K čemu slouží letová informační služba (FIS)?",
+      "od1": "K navigaci po letištní ploše",
+      "od2": "K poskytování informací o počasí a provozu",
+      "od3": "K plánování servisu letadel",
+      "spr": "od2"
+    },
+    {
+      "ot": "Co znamená zkratka IFR?",
+      "od1": "Instrument Flight Rules",
+      "od2": "International Flight Regulation",
+      "od3": "Integrated Flight Radar",
+      "spr": "od1"
+    },
+    {
+      "ot": "Kdo má hlavní odpovědnost za separaci letadel ve vzduchu?",
+      "od1": "Pilot",
+      "od2": "Letištní pracovník",
+      "od3": "Řídící letového provozu",
+      "spr": "od3"
+    },
+    {
+      "ot": "Jaká služba se poskytuje v řízeném vzdušném prostoru?",
+      "od1": "Poradenská služba",
+      "od2": "Řídící služba",
+      "od3": "Zdravotní služba",
+      "spr": "od2"
+    },
+    {
+      "ot": "Jaká zkratka označuje radarové řízení přibližování?",
+      "od1": "TWR",
+      "od2": "ACC",
+      "od3": "APP",
+      "spr": "od3"
+    },
+    {
+      "ot": "Co znamená squawk kód 7500?",
+      "od1": "Technická závada",
+      "od2": "Únos letadla",
+      "od3": "Nouzové přistání",
+      "spr": "od2"
+    },
+    {
+      "ot": "K čemu slouží sekundární radar (SSR)?",
+      "od1": "Zobrazuje počasí v okolí",
+      "od2": "Identifikuje letadla pomocí transpondéru",
+      "od3": "Měří výšku pomocí barometrického tlaku",
+      "spr": "od2"
+    },
+    {
+      "ot": "Jaká služba se poskytuje ve třídě vzdušného prostoru G?",
+      "od1": "Řídící služba",
+      "od2": "Žádná",
+      "od3": "Letová informační služba",
+      "spr": "od3"
+    },
+    {
+      "ot": "Co znamená výraz „cleared for takeoff“?",
+      "od1": "Letadlo má povolení zahájit vzlet",
+      "od2": "Letadlo má přistát",
+      "od3": "Letadlo musí čekat",
+      "spr": "od1"
+    },
+    {
+      "ot": "K čemu slouží věžová služba (TWR)?",
+      "od1": "Řídí provoz ve vzduchu v celém státě",
+      "od2": "Řídí pohyb letadel na zemi a v okolí letiště",
+      "od3": "Řídí navigaci přes oceán",
+      "spr": "od2"
+    },
+    {
+      "ot": "Jaký kód znamená všeobecné nouzové volání?",
+      "od1": "PAN PAN",
+      "od2": "MAYDAY",
+      "od3": "SOS",
+      "spr": "od2"
+    },
+    {
+      "ot": "Jaký je účel letového plánu?",
+      "od1": "Urychlení odbavení cestujících",
+      "od2": "Informace pro řízení o zamýšleném letu",
+      "od3": "Pojištění letadla",
+      "spr": "od2"
+    },
+    {
+      "ot": "Jak se říká prostoru, kde je provoz řízen ACC?",
+      "od1": "Řízený vzdušný prostor",
+      "od2": "Letová zóna",
+      "od3": "Zákazový prostor",
+      "spr": "od1"
+    },
+    {
+      "ot": "Co znamená zkratka VFR?",
+      "od1": "Visual Flight Rules",
+      "od2": "Vertical Flight Record",
+      "od3": "Verified Flight Response",
+      "spr": "od1"
+    },
+    {
+      "ot": "Kdo odpovídá za navigaci při VFR letu?",
+      "od1": "Řídící letového provozu",
+      "od2": "Pilot",
+      "od3": "Mechanik",
+      "spr": "od2"
+    },
+    {
+      "ot": "Jaká fráze se používá pro potvrzení příjmu pokynu od ATC?",
+      "od1": "Confirm",
+      "od2": "Roger",
+      "od3": "Okay",
+      "spr": "od2"
+    },
+    {
+      "ot": "Jaká zkratka označuje oblastní řídící středisko?",
+      "od1": "ACC",
+      "od2": "ATZ",
+      "od3": "FIS",
+      "spr": "od1"
+    }
+  ]
+}
