@@ -4,7 +4,7 @@ import React, { PropsWithChildren } from "react";
 const ThemedView = ({ children, ...props }: PropsWithChildren<ViewProps>) => {
   return (
     <View {...props}>
-      <Text style={{ fontFamily: "Inter" }}>{children}</Text>
+      <Text style={{ fontFamily: "Inter", display: "contents" }}>{children}</Text>
     </View>
   );
 };

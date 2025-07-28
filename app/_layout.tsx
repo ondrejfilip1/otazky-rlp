@@ -56,6 +56,10 @@ export default function RootLayout() {
     <PaperProvider>
       <Stack>
         <Stack.Screen name="welcome" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="lesson/[lessonNumber]"
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>

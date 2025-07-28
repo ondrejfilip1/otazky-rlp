@@ -8,9 +8,16 @@ type LoadingScreenProps = {
 
 const LoadingScreen = (props: LoadingScreenProps) => {
   return (
-    <View>
+    <View
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Text>{props.description}</Text>
-      <ActivityIndicator animating={true} color={MD2Colors.red800} />
+      <ActivityIndicator animating={true} color={MD2Colors.blue600} size="large" />
     </View>
   );
 };
