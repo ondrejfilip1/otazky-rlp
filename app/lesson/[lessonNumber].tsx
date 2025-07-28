@@ -93,15 +93,15 @@ const LessonScreen = () => {
         {numberArray.length > 0 ? (
           <>
             <ProgressBar
-              style={{ height: 6, marginBottom: 2 }}
+              style={{ height: 6, borderRadius: 6 }}
               progress={(totalQuestions - numberArray.length) / totalQuestions}
-              color={MD2Colors.blue600}
             />
             <View
               style={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                marginTop: 10
               }}
             >
               <Tooltip title="Ukončit lekci">
@@ -111,7 +111,6 @@ const LessonScreen = () => {
                   icon={(props) => <X {...props} />}
                   style={{
                     backgroundColor: dark ? "#1e293b" : MD2Colors.blue100,
-                    marginTop: 20,
                     marginLeft: 0,
                   }}
                 />
@@ -147,7 +146,6 @@ const LessonScreen = () => {
                   icon={(props) => <Flag {...props} />}
                   style={{
                     backgroundColor: dark ? "#1e293b" : MD2Colors.blue100,
-                    marginTop: 20,
                     marginRight: 0,
                   }}
                 />
@@ -199,9 +197,9 @@ const LessonScreen = () => {
                       {hasAnswered && (
                         <>
                           {questions[currentIndex]["spr"] === value ? (
-                            <Check color={MD2Colors.green800} />
+                            <Check color={dark ? MD2Colors.green200 : MD2Colors.green800} />
                           ) : (
-                            <X color={MD2Colors.red800} />
+                            <X color={dark ? MD2Colors.red200 : MD2Colors.red800} />
                           )}
                         </>
                       )}
