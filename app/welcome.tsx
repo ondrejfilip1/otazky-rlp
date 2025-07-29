@@ -1,3 +1,4 @@
+import LoadingScreen from "@/components/LoadingScreen";
 import ThemedView from "@/components/ThemedView";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
@@ -25,6 +26,7 @@ export default function WelcomeScreen() {
 
   return (
     <>
+    {username !== "" ? (
       <View
         style={{
           flex: 1,
@@ -51,6 +53,10 @@ export default function WelcomeScreen() {
           Pokračovat
         </Button>
       </View>
+    ) : (
+      <LoadingScreen description="Načítání" />
+    )}
+      
     </>
   );
 }

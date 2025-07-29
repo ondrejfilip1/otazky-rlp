@@ -7,10 +7,17 @@ import "@/global.css";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useEffect } from "react";
-import { MD3DarkTheme, MD3LightTheme, PaperProvider } from "react-native-paper";
+import {
+  MD3DarkTheme,
+  MD3LightTheme,
+  PaperProvider,
+  useTheme,
+} from "react-native-paper";
+import { View, StyleSheet } from "react-native";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  const { colors } = useTheme();
 
   const lightTheme = {
     ...MD3LightTheme,
@@ -52,16 +59,25 @@ export default function RootLayout() {
 
   return (
     <PaperProvider theme={theme}>
-      <Stack>
-        <Stack.Screen name="welcome" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="lesson/[lessonNumber]"
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+      <View style={[StyleSheet.absoluteFill, { backgroundColor: theme.colors.background }]}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            contentStyle: {
+              backgroundColor: colors.background,
+            },
+          }}
+        >
+          <Stack.Screen name="welcome" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="lesson/[lessonNumber]"
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </View>
     </PaperProvider>
   );
 }

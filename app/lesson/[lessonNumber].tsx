@@ -63,7 +63,8 @@ const LessonScreen = () => {
   useEffect(() => {
     //console.log(numberArray);
     if (numberArray && numberArray.length > 0) {
-      setCurrentIndex(Math.floor(Math.random() * numberArray.length));
+      const randomIndex = Math.floor(Math.random() * numberArray.length);
+      setCurrentIndex(numberArray[randomIndex]);
       setHasAnswered(false);
     }
   }, [numberArray]);
@@ -76,7 +77,7 @@ const LessonScreen = () => {
   const handleContinue = () => {
     if (currentIndex !== undefined)
       setNumberArray((prev) =>
-        prev.filter((item) => item !== numberArray[currentIndex])
+        prev.filter((item) => item !== currentIndex)
       );
   };
 
