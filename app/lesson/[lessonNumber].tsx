@@ -239,8 +239,7 @@ const LessonScreen = () => {
               style={{ marginVertical: 16 }}
             />
             <Button
-              style={{ backgroundColor: MD2Colors.blue100 }}
-              textColor="black"
+              mode="contained"
               onPress={() => router.replace("/")}
             >
               Jít zpět

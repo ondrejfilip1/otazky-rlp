@@ -8,6 +8,7 @@ import "@/global.css";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useEffect } from "react";
 import {
+  MD2Colors,
   MD3DarkTheme,
   MD3LightTheme,
   PaperProvider,
@@ -32,6 +33,15 @@ export default function RootLayout() {
     colors: {
       ...MD3DarkTheme.colors,
       primary: "#3b82f6",
+      onPrimary: MD2Colors.grey900,
+      elevation: {
+        level0: "transparent",
+        level1: "rgb(37, 35, 42)",
+        level2: "rgb(44, 40, 49)", 
+        level3: "rgba(28, 27, 31, 1)",
+        level4: "rgb(51, 46, 58)",
+        level5: "rgb(52, 49, 63)",
+      },
     },
   };
 
@@ -59,7 +69,12 @@ export default function RootLayout() {
 
   return (
     <PaperProvider theme={theme}>
-      <View style={[StyleSheet.absoluteFill, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[
+          StyleSheet.absoluteFill,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
         <Stack
           screenOptions={{
             headerShown: false,
