@@ -31,7 +31,7 @@ type Question = {
 const LessonScreen = () => {
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState<Question[]>([]);
-  const { lessonNumber } = useLocalSearchParams();
+  const { lessonNumber, hardLesson } = useLocalSearchParams();
   const [numberArray, setNumberArray] = useState<number[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>();
   const [hasAnswered, setHasAnswered] = useState(false);
@@ -46,14 +46,38 @@ const LessonScreen = () => {
     loadLesson();
   }, []);
 
-  const loadLesson = () => {
+  const loadLesson = async () => {
     try {
       if (!lessonNumber) return;
+
       const lesson = lessonList[lessonNumber as string];
-      setQuestions(lesson.otazky);
-      // array [0, 1, 2, ...]
-      setNumberArray([...Array(lesson.otazky.length).keys()]);
-      setTotalQuestions(lesson.otazky.length);
+      let allQuestions: Question[] = [];
+
+      if (hardLesson) {
+        const hardQuestions = await AsyncStorage.getItem("hardQuestions");
+
+        if (hardQuestions) {
+          const hardQuestionsArray =
+            JSON.parse(hardQuestions)[lessonNumber as string];
+
+          let finalArray: Question[] = [];
+          lesson.otazky.map((value: Question, index: number) => {
+            if (hardQuestionsArray.includes(index)) finalArray.push(value);
+          });
+          allQuestions = finalArray;
+          setQuestions(finalArray);
+          const arr = [...Array(finalArray.length).keys()];
+          setNumberArray(arr);
+          setTotalQuestions(finalArray.length);
+        }
+      } else {
+        allQuestions = lesson.otazky;
+      }
+
+      setQuestions(allQuestions);
+      const arr = [...Array(allQuestions.length).keys()];
+      setNumberArray(arr);
+      setTotalQuestions(allQuestions.length);
     } catch (err) {
       console.error(err);
     } finally {
@@ -85,6 +109,8 @@ const LessonScreen = () => {
   };
 
   const addQuestionToList = async () => {
+    if (hardLesson) return;
+    
     try {
       const hardQuestions = await AsyncStorage.getItem("hardQuestions");
       let hardQuestionsJSON = hardQuestions ? JSON.parse(hardQuestions) : {};
@@ -100,7 +126,7 @@ const LessonScreen = () => {
         "hardQuestions",
         JSON.stringify(hardQuestionsJSON)
       );
-      console.log(hardQuestionsJSON);
+      // console.log(hardQuestionsJSON);
     } catch (err) {
       console.error(err);
     }
@@ -146,11 +172,11 @@ const LessonScreen = () => {
                   visible={dialogVisible}
                   onDismiss={() => setDialogVisible(false)}
                 >
-                  <Dialog.Title style={{ fontFamily: "Inter"}}>Upozornění</Dialog.Title>
+                  <Dialog.Title style={{ fontFamily: "Inter" }}>
+                    Upozornění
+                  </Dialog.Title>
                   <Dialog.Content>
-                    <ThemedText>
-                      Opravdu chcete ukončit lekci?
-                    </ThemedText>
+                    <ThemedText>Opravdu chcete ukončit lekci?</ThemedText>
                   </Dialog.Content>
                   <Dialog.Actions>
                     <Button

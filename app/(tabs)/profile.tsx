@@ -48,6 +48,7 @@ const Profile = () => {
         mode="contained"
         style={{ backgroundColor: MD3Colors.error50 }}
         onPress={deleteHardQuestions}
+        labelStyle={{fontFamily: "Inter"}}
       >
         Vymazat problémové otázky
       </Button>
