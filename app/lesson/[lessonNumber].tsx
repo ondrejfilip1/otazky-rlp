@@ -18,6 +18,7 @@ import { Check, Flag, X } from "lucide-react-native";
 import ThemedText from "@/components/ThemedText";
 import ScoreCircle from "@/components/ui/ScoreCircle";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type Question = {
   ot: string;
@@ -45,10 +46,10 @@ const LessonScreen = () => {
     loadLesson();
   }, []);
 
-  const loadLesson = async () => {
+  const loadLesson = () => {
     try {
       if (!lessonNumber) return;
-      const lesson = await lessonList[lessonNumber as string];
+      const lesson = lessonList[lessonNumber as string];
       setQuestions(lesson.otazky);
       // array [0, 1, 2, ...]
       setNumberArray([...Array(lesson.otazky.length).keys()]);
@@ -71,14 +72,38 @@ const LessonScreen = () => {
 
   const handleAnswer = (correct: boolean) => {
     setHasAnswered(true);
-    if (correct && !hasAnswered) setCorrectlyAnswered((prev) => prev + 1);
+    if (hasAnswered) return;
+    if (correct) setCorrectlyAnswered((prev) => prev + 1);
+    else addQuestionToList();
   };
 
-  const handleContinue = () => {
+  const handleContinue = (skip?: boolean) => {
+    if (skip) addQuestionToList();
+
     if (currentIndex !== undefined)
-      setNumberArray((prev) =>
-        prev.filter((item) => item !== currentIndex)
+      setNumberArray((prev) => prev.filter((item) => item !== currentIndex));
+  };
+
+  const addQuestionToList = async () => {
+    try {
+      const hardQuestions = await AsyncStorage.getItem("hardQuestions");
+      let hardQuestionsJSON = hardQuestions ? JSON.parse(hardQuestions) : {};
+
+      // init array for this lesson if its not already there
+      if (!hardQuestionsJSON[lessonNumber as string])
+        hardQuestionsJSON[lessonNumber as string] = [];
+
+      if (!hardQuestionsJSON[lessonNumber as string].includes(currentIndex))
+        hardQuestionsJSON[lessonNumber as string].push(currentIndex);
+
+      await AsyncStorage.setItem(
+        "hardQuestions",
+        JSON.stringify(hardQuestionsJSON)
       );
+      console.log(hardQuestionsJSON);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   if (loading) return <LoadingScreen description="Načítání lekce" />;
@@ -102,7 +127,7 @@ const LessonScreen = () => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
-                marginTop: 10
+                marginTop: 10,
               }}
             >
               <Tooltip title="Ukončit lekci">
@@ -121,17 +146,21 @@ const LessonScreen = () => {
                   visible={dialogVisible}
                   onDismiss={() => setDialogVisible(false)}
                 >
-                  <Dialog.Title>Upozornění</Dialog.Title>
+                  <Dialog.Title style={{ fontFamily: "Inter"}}>Upozornění</Dialog.Title>
                   <Dialog.Content>
-                    <Text variant="bodyMedium">
+                    <ThemedText>
                       Opravdu chcete ukončit lekci?
-                    </Text>
+                    </ThemedText>
                   </Dialog.Content>
                   <Dialog.Actions>
-                    <Button onPress={() => setDialogVisible(false)}>
+                    <Button
+                      labelStyle={{ fontFamily: "Inter" }}
+                      onPress={() => setDialogVisible(false)}
+                    >
                       Zavřít
                     </Button>
                     <Button
+                      labelStyle={{ fontFamily: "Inter" }}
                       onPress={() => router.replace("/")}
                       mode="contained"
                     >
@@ -142,7 +171,7 @@ const LessonScreen = () => {
               </Portal>
               <Tooltip title="Nevím otázku">
                 <IconButton
-                  onPress={handleContinue}
+                  onPress={() => handleContinue(true)}
                   iconColor={dark ? "#90a1b9" : MD2Colors.blue900}
                   icon={(props) => <Flag {...props} />}
                   style={{
@@ -198,9 +227,15 @@ const LessonScreen = () => {
                       {hasAnswered && (
                         <>
                           {questions[currentIndex]["spr"] === value ? (
-                            <Check color={dark ? MD2Colors.green200 : MD2Colors.green800} />
+                            <Check
+                              color={
+                                dark ? MD2Colors.green200 : MD2Colors.green800
+                              }
+                            />
                           ) : (
-                            <X color={dark ? MD2Colors.red200 : MD2Colors.red800} />
+                            <X
+                              color={dark ? MD2Colors.red200 : MD2Colors.red800}
+                            />
                           )}
                         </>
                       )}
@@ -210,10 +245,11 @@ const LessonScreen = () => {
 
                 {hasAnswered && (
                   <Button
+                    labelStyle={{ fontFamily: "Inter" }}
                     mode="contained"
                     style={{ backgroundColor: "#155dfc" }}
                     textColor="white"
-                    onPress={handleContinue}
+                    onPress={() => handleContinue()}
                   >
                     Pokračovat
                   </Button>
@@ -235,10 +271,11 @@ const LessonScreen = () => {
               radius={100}
               strokeWidth={10}
               progress={correctlyAnswered / totalQuestions}
-              color={MD2Colors.blue600}
+              color={colors.primary}
               style={{ marginVertical: 16 }}
             />
             <Button
+              labelStyle={{ fontFamily: "Inter" }}
               mode="contained"
               onPress={() => router.replace("/")}
             >

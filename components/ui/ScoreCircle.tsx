@@ -3,6 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import Svg, { Circle, Text as SvgText } from "react-native-svg";
+import ThemedText from "../ThemedText";
+import Animated, {
+  useAnimatedProps,
+  useDerivedValue,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 
 interface ScoreCircleProps {
   radius: number;
@@ -23,6 +30,7 @@ const ScoreCircle: React.FC<ScoreCircleProps & { style?: any }> = ({
   useEffect(() => {
     const circumferenceValue = 2 * Math.PI * radius;
     setCircumference(circumferenceValue);
+    theta.value = animateTo.value;
   }, [radius]);
 
   const strokeDashoffset = circumference * (1 - progress);
@@ -30,10 +38,28 @@ const ScoreCircle: React.FC<ScoreCircleProps & { style?: any }> = ({
 
   // centering stuff
   const fontSize = radius / 2.5;
-  const yOffset = fontSize * 0.3;
+
+  const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+
+  const invertedCompletion = (100 - progressValue) / 100;
+  const theta = useSharedValue(2 * Math.PI);
+  const animateTo = useDerivedValue(() => 2 * Math.PI * invertedCompletion);
+
+  const animatedProps = useAnimatedProps(() => {
+    return {
+      strokeDashoffset: withTiming(theta.value * radius, {
+        duration: 750,
+      }),
+    };
+  });
 
   return (
-    <View style={[{ aspectRatio: 1, width: radius * 2 }, style]}>
+    <View
+      style={[
+        { aspectRatio: 1, width: radius * 2, position: "relative" },
+        style,
+      ]}
+    >
       <Svg width={radius * 2} height={radius * 2}>
         <Circle
           stroke="rgba(0, 0, 0, 0.1)"
@@ -43,36 +69,28 @@ const ScoreCircle: React.FC<ScoreCircleProps & { style?: any }> = ({
           cy={radius}
           r={radius - strokeWidth / 2}
         />
-        <Circle
+        <AnimatedCircle
+          animatedProps={animatedProps}
           stroke={color}
           fill="transparent"
           strokeWidth={strokeWidth}
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
+          strokeLinecap="round"
           cx={radius}
           cy={radius}
           r={radius - strokeWidth / 2}
         />
-        <SvgText
-          x={radius - fontSize * 0.15}
-          y={radius + yOffset}
-          textAnchor="middle"
-          fontSize={fontSize}
-          fill={color}
-          fontWeight="bold"
+        <ThemedText
+          style={{
+            fontSize: fontSize,
+            textAlign: "center",
+            color: color,
+            transform: "translateY(75%)",
+          }}
         >
-          {progressValue}
-        </SvgText>
-        <SvgText
-          x={radius + fontSize * 0.15}
-          y={radius + yOffset}
-          textAnchor="start"
-          fontSize={fontSize}
-          fill={color}
-          fontWeight="bold"
-        >
-          %
-        </SvgText>
+          {progressValue}%
+        </ThemedText>
       </Svg>
     </View>
   );

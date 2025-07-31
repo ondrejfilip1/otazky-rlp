@@ -19,10 +19,11 @@ const LoadingScreen = (props: LoadingScreenProps) => {
         alignItems: "center",
         height: "100%",
         backgroundColor: colors.background,
-        marginBottom: 12
       }}
     >
-      <ThemedText>{props.description}</ThemedText>
+      <ThemedText style={{ fontSize: 20, marginBottom: 12 }}>
+        {props.description}
+      </ThemedText>
       <ActivityIndicator
         animating={true}
         color={MD2Colors.blue600}
