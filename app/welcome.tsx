@@ -1,13 +1,14 @@
 import LoadingScreen from "@/components/LoadingScreen";
-import ThemedView from "@/components/ThemedView";
+import ThemedText from "@/components/ThemedText";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { SetStateAction, useEffect, useState } from "react";
-import { Text, View } from "react-native";
 import { Button } from "react-native-paper";
 import { TextInput } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function WelcomeScreen() {
   const [username, setUsername] = useState("");
+  const [loaded, setLoaded] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -17,6 +18,7 @@ export default function WelcomeScreen() {
   const loadUsername = async () => {
     const data = await AsyncStorage.getItem("username");
     if (data) router.replace("/");
+    else setLoaded(true);
   };
 
   const login = async () => {
@@ -26,37 +28,41 @@ export default function WelcomeScreen() {
 
   return (
     <>
-    {username !== "" ? (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 20,
-          gap: 16,
-        }}
-      >
-        <Text
-          className="text-4xl"
-          style={{ textAlign: "center", marginBottom: 20 }}
+      {loaded ? (
+        <SafeAreaView
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            padding: 20,
+            gap: 16,
+          }}
         >
-          Vítejte
-        </Text>
-        <TextInput
-          mode="outlined"
-          style={{ width: "100%" }}
-          label="Uživatelské jméno"
-          value={username}
-          onChangeText={(text: SetStateAction<string>) => setUsername(text)}
-        />
-        <Button mode="contained" disabled={!username} onPress={login}>
-          Pokračovat
-        </Button>
-      </View>
-    ) : (
-      <LoadingScreen description="Načítání" />
-    )}
-      
+          <ThemedText
+            className="text-4xl"
+            style={{ textAlign: "center", marginBottom: 20 }}
+          >
+            Vítejte
+          </ThemedText>
+          <TextInput
+            mode="outlined"
+            style={{ width: "100%", fontFamily: "Inter" }}
+            label="Uživatelské jméno"
+            value={username}
+            onChangeText={(text: SetStateAction<string>) => setUsername(text)}
+          />
+          <Button
+            mode="contained"
+            disabled={!username}
+            labelStyle={{ fontFamily: "Inter" }}
+            onPress={login}
+          >
+            Pokračovat
+          </Button>
+        </SafeAreaView>
+      ) : (
+        <LoadingScreen description="Načítání" />
+      )}
     </>
   );
 }
