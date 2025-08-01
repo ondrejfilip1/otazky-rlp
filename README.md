@@ -5,6 +5,7 @@ Tato mobilní aplikace byla vytvořena pomocí:
 - [Expo](https://expo.dev/) - Vývoj aplikace
 - [TypeScript](https://www.typescriptlang.org/) - Jazyk
 - [react-native-paper](https://callstack.github.io/react-native-paper/) - Komponenty
+- [async-storage](https://github.com/react-native-async-storage/async-storage) - Ukládání dat
 
 ## Podpora OS
 - ✅ Android
