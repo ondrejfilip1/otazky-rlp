@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-test",
-    "slug": "react-native-test",
+    "name": "Otázky ŘLP",
+    "slug": "otazky-rlp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -17,7 +17,7 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.otazky.app"
+      "package": "com.otazky.rlp"
     },
     "web": {
       "bundler": "metro",
