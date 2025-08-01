@@ -1,4 +1,4 @@
-package com.otazky.app
+package com.otazky.rlp
 
 import android.app.Application
 import android.content.res.Configuration

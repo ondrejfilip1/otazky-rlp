@@ -25,7 +25,7 @@
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="reactnativetest"/>
-        <data android:scheme="exp+react-native-test"/>
+        <data android:scheme="exp+otazky-rlp"/>
       </intent-filter>
     </activity>
   </application>

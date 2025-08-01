@@ -31,7 +31,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
 }
 expoAutolinking.useExpoModules()
 
-rootProject.name = 'react-native-test'
+rootProject.name = 'Otázky ŘLP'
 
 expoAutolinking.useExpoVersionCatalog()
 

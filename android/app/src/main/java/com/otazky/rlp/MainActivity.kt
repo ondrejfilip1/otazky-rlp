@@ -1,4 +1,4 @@
-package com.otazky.app
+package com.otazky.rlp
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build
