@@ -110,7 +110,7 @@ const LessonScreen = () => {
 
   const addQuestionToList = async () => {
     if (hardLesson) return;
-    
+
     try {
       const hardQuestions = await AsyncStorage.getItem("hardQuestions");
       let hardQuestionsJSON = hardQuestions ? JSON.parse(hardQuestions) : {};
@@ -140,6 +140,9 @@ const LessonScreen = () => {
         style={{
           padding: 16,
           flex: 0,
+          maxWidth: 600,
+          width: "100%",
+          marginHorizontal: "auto",
         }}
       >
         {numberArray.length > 0 ? (
@@ -171,6 +174,11 @@ const LessonScreen = () => {
                 <Dialog
                   visible={dialogVisible}
                   onDismiss={() => setDialogVisible(false)}
+                  style={{
+                    maxWidth: 600,
+                    width: "100%",
+                    marginHorizontal: "auto",
+                  }}
                 >
                   <Dialog.Title style={{ fontFamily: "Inter" }}>
                     Upozornění

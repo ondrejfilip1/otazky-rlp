@@ -27,57 +27,61 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView
-      style={{
-        padding: 16,
-        backgroundColor: colors.background,
-        height: "100%",
-      }}
-    >
-      <View
+    <View style={{ backgroundColor: colors.background, flex: 1 }}>
+      <SafeAreaView
         style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: 20,
+          padding: 16,
+          height: "100%",
+          maxWidth: 600,
+          width: "100%",
+          marginHorizontal: "auto",
         }}
       >
-        <ThemedText style={{ fontSize: 24 }}>Lekce</ThemedText>
-        <GraduationCap
-          style={{ marginLeft: "auto" }}
-          color={colors.onBackground}
-        />
-      </View>
-      {Object.entries(lessonList).map(([lessonID, value]) => (
-        <LessonBox
-          name={value.nazev}
-          lessonID={lessonID}
-          questionCount={value.otazky.length}
-          key={lessonID}
-        />
-      ))}
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginVertical: 20,
-        }}
-      >
-        <ThemedText style={{ fontSize: 24 }}>Problémové otázky</ThemedText>
-        <Brain style={{ marginLeft: "auto" }} color={colors.onBackground} />
-      </View>
-      {Object.entries(hardQuestions).map(([lessonID, questions]) => (
-        <LessonBox
-          name={lessonList[lessonID].nazev}
-          lessonID={`${lessonID}?hardLesson=true`}
-          questionCount={Array.isArray(questions) ? questions.length : 0}
-          key={lessonID}
-        />
-      ))}
-    </SafeAreaView>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 20,
+          }}
+        >
+          <ThemedText style={{ fontSize: 24 }}>Lekce</ThemedText>
+          <GraduationCap
+            style={{ marginLeft: "auto" }}
+            color={colors.onBackground}
+          />
+        </View>
+        {Object.entries(lessonList).map(([lessonID, value]) => (
+          <LessonBox
+            name={value.nazev}
+            lessonID={lessonID}
+            questionCount={value.otazky.length}
+            key={lessonID}
+          />
+        ))}
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginVertical: 20,
+          }}
+        >
+          <ThemedText style={{ fontSize: 24 }}>Problémové otázky</ThemedText>
+          <Brain style={{ marginLeft: "auto" }} color={colors.onBackground} />
+        </View>
+        {Object.entries(hardQuestions).map(([lessonID, questions]) => (
+          <LessonBox
+            name={lessonList[lessonID].nazev}
+            lessonID={`${lessonID}?hardLesson=true`}
+            questionCount={Array.isArray(questions) ? questions.length : 0}
+            key={lessonID}
+          />
+        ))}
+      </SafeAreaView>
+    </View>
   );
 };
 

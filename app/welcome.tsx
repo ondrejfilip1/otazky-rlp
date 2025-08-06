@@ -39,11 +39,13 @@ export default function WelcomeScreen() {
               alignItems: "center",
               padding: 20,
               gap: 16,
+              maxWidth: 600,
+              width: "100%",
+              marginHorizontal: "auto"
             }}
           >
             <ThemedText
-              className="text-4xl"
-              style={{ textAlign: "center", marginBottom: 20 }}
+              style={{ textAlign: "center", marginBottom: 20, fontSize: 36 }}
             >
               Vítejte
             </ThemedText>
