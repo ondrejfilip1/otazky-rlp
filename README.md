@@ -7,9 +7,10 @@ Tato mobilní aplikace byla vytvořena pomocí:
 - [react-native-paper](https://callstack.github.io/react-native-paper/) - Komponenty
 - [async-storage](https://github.com/react-native-async-storage/async-storage) - Ukládání dat
 
-## Podpora OS
+## Podpora
 - ✅ Android
 - ❎ iOS
+- ✅ [Web](https://otazky-rlp.onrender.com/)
 
 ## Spuštění projektu
 
