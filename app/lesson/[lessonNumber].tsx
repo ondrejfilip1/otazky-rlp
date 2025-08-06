@@ -1,8 +1,14 @@
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import React, { useEffect, useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
+import NumberInput from "@/components/NumberInput";
+import TextInputQuestion from "@/components/TextInput";
+import ThemedText from "@/components/ThemedText";
+import ScoreCircle from "@/components/ui/ScoreCircle";
+import LessonList from "@/utils/LessonList";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import lessonList from "@/utils/lessonMap";
+import { Check, Flag, X } from "lucide-react-native";
+import React, { useEffect, useState } from "react";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import {
   Button,
   Dialog,
@@ -11,21 +17,84 @@ import {
   Portal,
   ProgressBar,
   Tooltip,
-  Text,
   useTheme,
 } from "react-native-paper";
-import { Check, Flag, X } from "lucide-react-native";
-import ThemedText from "@/components/ThemedText";
-import ScoreCircle from "@/components/ui/ScoreCircle";
 import { SafeAreaView } from "react-native-safe-area-context";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-type Question = {
-  ot: string;
-  od1: string;
-  od2: string;
-  od3: string;
-  spr: string;
+type Question =
+  | {
+      ot: string;
+      od1: string;
+      od2: string;
+      od3?: string;
+      od4?: string;
+      od5?: string;
+      spr: string;
+      imgPath?: string;
+    }
+  | {
+      ot: string;
+      imgPath?: string;
+    };
+
+const renderInputQuestion = (string: string) => {
+  //console.log(string);
+
+  const elements = [];
+  let currentText = "";
+  let inputCounter = 0;
+
+  // split tags to find components
+  const segments = string.split(/(<[^>]+>)/);
+
+  for (let i = 0; i < segments.length; i++) {
+    const segment = segments[i];
+
+    if (segment.startsWith("<") && segment.endsWith(">")) {
+      // pre text
+      if (currentText) {
+        elements.push(
+          <ThemedText key={`text_${i}`} style={{ fontSize: 32 }}>
+            {currentText}
+          </ThemedText>
+        );
+        currentText = "";
+      }
+
+      // parse inputs
+      if (segment.includes("NumberInput")) {
+        const match = segment.match(/correct=(\d+)/);
+        if (match)
+          elements.push(<NumberInput key={`number_${inputCounter++}`} />);
+      } else if (segment.includes("TextInput")) {
+        const match = segment.match(/correct="([^"]+)"/);
+        if (match)
+          elements.push(<TextInputQuestion key={`text_${inputCounter++}`} />);
+      }
+    } else {
+      currentText += segment;
+    }
+  }
+
+  // post text
+  if (currentText) {
+    elements.push(
+      <ThemedText style={{ fontSize: 32 }}>{currentText}</ThemedText>
+    );
+  }
+
+  return (
+    <View
+      style={{
+        flexDirection: "row",
+        flexWrap: "wrap",
+        alignItems: "center",
+        marginVertical: 24,
+      }}
+    >
+      {elements}
+    </View>
+  );
 };
 
 const LessonScreen = () => {
@@ -38,6 +107,7 @@ const LessonScreen = () => {
   const [totalQuestions, setTotalQuestions] = useState(0);
   const [correctlyAnswered, setCorrectlyAnswered] = useState(0);
   const [dialogVisible, setDialogVisible] = useState(false);
+  const [lessonName, setLessonName] = useState("");
 
   const router = useRouter();
   const { colors, dark } = useTheme();
@@ -50,8 +120,10 @@ const LessonScreen = () => {
     try {
       if (!lessonNumber) return;
 
-      const lesson = lessonList[lessonNumber as string];
+      const lesson = LessonList[lessonNumber as string];
       let allQuestions: Question[] = [];
+
+      setLessonName(lesson.nazev);
 
       if (hardLesson) {
         const hardQuestions = await AsyncStorage.getItem("hardQuestions");
@@ -141,6 +213,7 @@ const LessonScreen = () => {
           padding: 16,
           flex: 0,
           maxWidth: 600,
+          height: "100%",
           width: "100%",
           marginHorizontal: "auto",
         }}
@@ -156,6 +229,7 @@ const LessonScreen = () => {
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                alignItems: "center",
                 marginTop: 10,
               }}
             >
@@ -203,6 +277,23 @@ const LessonScreen = () => {
                   </Dialog.Actions>
                 </Dialog>
               </Portal>
+              <View>
+                <ThemedText
+                  style={{
+                    opacity: 0.7,
+                    marginBottom: 4,
+                    fontSize: 16,
+                    textAlign: "center",
+                  }}
+                >
+                  {lessonName}
+                </ThemedText>
+                <ThemedText
+                  style={{ opacity: 0.7, fontSize: 12, textAlign: "center" }}
+                >
+                  Otázka č.{(currentIndex as number) + 1}
+                </ThemedText>
+              </View>
               <Tooltip title="Nevím otázku">
                 <IconButton
                   onPress={() => handleContinue(true)}
@@ -217,76 +308,117 @@ const LessonScreen = () => {
             </View>
             {typeof currentIndex === "number" && questions[currentIndex] && (
               <>
-                <ThemedText style={{ fontSize: 32, marginVertical: 24 }}>
-                  {questions[currentIndex].ot}
-                </ThemedText>
+                {"spr" in questions[currentIndex] ? (
+                  <>
+                    <ThemedText style={{ fontSize: 32, marginVertical: 24 }}>
+                      {questions[currentIndex].ot}
+                    </ThemedText>
 
-                {["od1", "od2", "od3"].map((value, index) => (
-                  <TouchableOpacity
-                    activeOpacity={0.6}
-                    key={index}
-                    style={{ marginBottom: 12 }}
-                    onPress={() =>
-                      handleAnswer(questions[currentIndex]["spr"] === value)
-                    }
-                  >
-                    <View
+                    {["od1", "od2", "od3", "od4", "od5"]
+                      .filter(
+                        (value) =>
+                          questions[currentIndex][value as keyof Question]
+                      )
+                      .map((value, index) => (
+                        <TouchableOpacity
+                          activeOpacity={0.6}
+                          key={index}
+                          style={{ marginBottom: 12 }}
+                          onPress={() =>
+                            handleAnswer(
+                              "spr" in questions[currentIndex] &&
+                                questions[currentIndex]["spr"] === value
+                            )
+                          }
+                        >
+                          <View
+                            style={{
+                              backgroundColor: !hasAnswered
+                                ? dark
+                                  ? "#1e293b"
+                                  : MD2Colors.blue100
+                                : "spr" in questions[currentIndex] &&
+                                    questions[currentIndex]["spr"] === value
+                                  ? dark
+                                    ? MD2Colors.green700
+                                    : MD2Colors.green300
+                                  : dark
+                                    ? MD2Colors.red700
+                                    : MD2Colors.red300,
+                              borderRadius: 12,
+                              padding: 12,
+                              flexDirection: "row",
+                              alignItems: "center",
+                              flexWrap: "wrap",
+                            }}
+                          >
+                            <ThemedText
+                              style={{ fontSize: 24, marginRight: 12 }}
+                            >
+                              {["A", "B", "C"][index]}
+                            </ThemedText>
+                            <ThemedText
+                              style={{ fontSize: 14, flexShrink: 1, flex: 1 }}
+                            >
+                              {questions[currentIndex][value as keyof Question]}
+                            </ThemedText>
+                            {hasAnswered && (
+                              <>
+                                {"spr" in questions[currentIndex] &&
+                                questions[currentIndex]["spr"] === value ? (
+                                  <Check
+                                    color={
+                                      dark
+                                        ? MD2Colors.green200
+                                        : MD2Colors.green800
+                                    }
+                                  />
+                                ) : (
+                                  <X
+                                    color={
+                                      dark ? MD2Colors.red200 : MD2Colors.red800
+                                    }
+                                  />
+                                )}
+                              </>
+                            )}
+                          </View>
+                        </TouchableOpacity>
+                      ))}
+                    <Button
+                      labelStyle={{ fontFamily: "Inter" }}
+                      mode="contained"
                       style={{
-                        backgroundColor: !hasAnswered
-                          ? dark
-                            ? "#1e293b"
-                            : MD2Colors.blue100
-                          : questions[currentIndex]["spr"] === value
-                            ? dark
-                              ? MD2Colors.green700
-                              : MD2Colors.green300
-                            : dark
-                              ? MD2Colors.red700
-                              : MD2Colors.red300,
-                        borderRadius: 12,
-                        padding: 12,
-                        flexDirection: "row",
-                        alignItems: "center",
-                        flexWrap: "wrap",
+                        backgroundColor: "#155dfc",
+                        visibility: hasAnswered ? "visible" : "hidden",
+                        pointerEvents: hasAnswered ? "auto" : "none",
+                        marginBottom: 12,
                       }}
+                      textColor="white"
+                      onPress={() => handleContinue()}
                     >
-                      <ThemedText style={{ fontSize: 24, marginRight: 12 }}>
-                        {["A", "B", "C"][index]}
-                      </ThemedText>
-                      <ThemedText
-                        style={{ fontSize: 14, flexShrink: 1, flex: 1 }}
-                      >
-                        {questions[currentIndex][value as keyof Question]}
-                      </ThemedText>
-                      {hasAnswered && (
-                        <>
-                          {questions[currentIndex]["spr"] === value ? (
-                            <Check
-                              color={
-                                dark ? MD2Colors.green200 : MD2Colors.green800
-                              }
-                            />
-                          ) : (
-                            <X
-                              color={dark ? MD2Colors.red200 : MD2Colors.red800}
-                            />
-                          )}
-                        </>
-                      )}
-                    </View>
-                  </TouchableOpacity>
-                ))}
+                      Pokračovat
+                    </Button>
+                  </>
+                ) : (
+                  <ThemedText style={{ fontSize: 32, marginVertical: 24 }}>
+                    {renderInputQuestion(questions[currentIndex as number].ot)}
+                  </ThemedText>
+                )}
 
-                {hasAnswered && (
-                  <Button
-                    labelStyle={{ fontFamily: "Inter" }}
-                    mode="contained"
-                    style={{ backgroundColor: "#155dfc" }}
-                    textColor="white"
-                    onPress={() => handleContinue()}
-                  >
-                    Pokračovat
-                  </Button>
+                {questions[currentIndex]["imgPath"] && (
+                  <View style={{ flexDirection: "row", borderRadius: 12 }}>
+                    <Image
+                      style={{
+                        width: "100%",
+                        flex: 1,
+                        aspectRatio: 1,
+                      }}
+                      resizeMode="contain"
+                      alt="Obrázek"
+                      source={{ uri: questions[currentIndex]["imgPath"] }}
+                    />
+                  </View>
                 )}
               </>
             )}

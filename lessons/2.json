@@ -1,0 +1,16 @@
+{
+  "nazev": "Test",
+  "otazky": [
+    {
+      "ot": "Otazka",
+      "od1": "Ano",
+      "od2": "Ano",
+      "od3": "Ano",
+      "spr": "od1",
+      "imgPath": "https://media.tenor.com/rcQf2wshw3oAAAAe/cat-von-king-von.png"
+    },
+    {
+      "ot": "Cislo: <NumberInput correct=12 /> Text: <TextInput correct=\"asdsad\" />"
+    }
+  ]
+}
