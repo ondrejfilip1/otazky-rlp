@@ -3,7 +3,6 @@ import { Stack, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import "@/global.css";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useEffect } from "react";
