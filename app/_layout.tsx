@@ -36,7 +36,7 @@ export default function RootLayout() {
       elevation: {
         level0: "transparent",
         level1: "rgb(37, 35, 42)",
-        level2: "rgb(44, 40, 49)", 
+        level2: "rgb(44, 40, 49)",
         level3: "rgba(28, 27, 31, 1)",
         level4: "rgb(51, 46, 58)",
         level5: "rgb(52, 49, 63)",
@@ -82,13 +82,18 @@ export default function RootLayout() {
             },
           }}
         >
-          <Stack.Screen name="welcome" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="welcome"
+            options={{ headerShown: false, title: "Vítejte" }}
+          />
           <Stack.Screen
             name="lesson/[lessonNumber]"
-            options={{ headerShown: false }}
+            options={{ headerShown: false, title: "Lekce" }}
           />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="+not-found" />
+          <Stack.Screen name="profile" options={{ title: "Profil" }} />
+          <Stack.Screen name="index" options={{ title: "Výběr lekcí" }} />
         </Stack>
         <StatusBar style="auto" />
       </View>
