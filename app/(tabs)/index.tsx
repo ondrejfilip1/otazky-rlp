@@ -1,5 +1,6 @@
 import LessonBox from "@/components/LessonBox";
 import ThemedText from "@/components/ThemedText";
+import { hardQuestionsEvent } from "@/utils/Events";
 import LessonList from "@/utils/LessonList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Brain, GraduationCap } from "lucide-react-native";
@@ -12,15 +13,20 @@ const HomeScreen = () => {
   const [hardQuestions, setHardQuestions] = useState({});
   const { colors } = useTheme();
 
-  useEffect(() => {
-    load();
-  }, []);
-
   const load = async () => {
     const hardQuestionsData = await AsyncStorage.getItem("hardQuestions");
     if (hardQuestionsData) setHardQuestions(JSON.parse(hardQuestionsData));
+    else setHardQuestions([]);
     //console.log(hardQuestionsData);
   };
+
+  useEffect(() => {
+    load();
+    hardQuestionsEvent.on("update", load);
+    return () => {
+      hardQuestionsEvent.off("update", load);
+    };
+  }, []);
 
   return (
     <View style={{ backgroundColor: colors.background, flex: 1 }}>
@@ -72,7 +78,11 @@ const HomeScreen = () => {
         </View>
         <View style={{ gap: 12 }}>
           {Object.keys(hardQuestions).length === 0 ? (
-            <ThemedText style={{textAlign: "center", opacity: 0.6, marginVertical: 24}}>Nemáte žádné problémové otázky</ThemedText>
+            <ThemedText
+              style={{ textAlign: "center", opacity: 0.6, marginVertical: 24 }}
+            >
+              Nemáte žádné problémové otázky
+            </ThemedText>
           ) : (
             <>
               {Object.entries(hardQuestions).map(([lessonID, questions]) => (

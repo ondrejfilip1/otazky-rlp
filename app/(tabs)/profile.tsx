@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -13,6 +12,7 @@ import {
 import ThemedText from "@/components/ThemedText";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { User } from "lucide-react-native";
+import { hardQuestionsEvent } from "@/utils/Events";
 
 const Profile = () => {
   const [hardQuestions, setHardQuestions] = useState({});
@@ -29,11 +29,16 @@ const Profile = () => {
     if (data) setUsername(data);
     const hardQuestionsData = await AsyncStorage.getItem("hardQuestions");
     if (hardQuestionsData) setHardQuestions(JSON.parse(hardQuestionsData));
+    else setHardQuestions([]);
   };
 
   const deleteHardQuestions = async () => {
     await AsyncStorage.removeItem("hardQuestions");
     setDialogVisible(false);
+    hardQuestionsEvent.emit("update");
+    const hardQuestionsData = await AsyncStorage.getItem("hardQuestions");
+    if (hardQuestionsData) setHardQuestions(JSON.parse(hardQuestionsData));
+    else setHardQuestions([]);
   };
 
   return (
