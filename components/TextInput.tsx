@@ -28,6 +28,7 @@ const TextInputQuestion = ({
   return (
     <View>
       <TextInput
+        dense
         mode="outlined"
         label="Text"
         value={value}

@@ -30,6 +30,7 @@ const NumberInput = ({
   return (
     <View>
       <TextInput
+        dense
         keyboardType="numeric"
         mode="outlined"
         label="Číslo"
