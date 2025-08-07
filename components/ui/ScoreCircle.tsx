@@ -84,7 +84,7 @@ const ScoreCircle: React.FC<ScoreCircleProps & { style?: any }> = ({
           cy={radius}
           r={radius - strokeWidth / 2}
         />
-        {Platform.OS === "android" || "ios" ? (
+        {Platform.OS === "android" || Platform.OS === "ios" ? (
           <ThemedText
             style={{
               fontSize: fontSize,
