@@ -1,7 +1,8 @@
 // credit: https://stackoverflow.com/questions/78750180/how-do-i-create-a-circular-progress-bar-in-expo-react-native-with-a-text-in-cent
+// TODO: Test text rendering on different OSs
 
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import Svg, { Circle, Text as SvgText } from "react-native-svg";
 import ThemedText from "../ThemedText";
 import Animated, {
@@ -10,6 +11,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import { useTheme } from "react-native-paper";
 
 interface ScoreCircleProps {
   radius: number;
@@ -38,6 +40,7 @@ const ScoreCircle: React.FC<ScoreCircleProps & { style?: any }> = ({
 
   // centering stuff
   const fontSize = radius / 2.5;
+  const { colors } = useTheme();
 
   const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
@@ -81,16 +84,30 @@ const ScoreCircle: React.FC<ScoreCircleProps & { style?: any }> = ({
           cy={radius}
           r={radius - strokeWidth / 2}
         />
-        <ThemedText
-          style={{
-            fontSize: fontSize,
-            textAlign: "center",
-            color: color,
-            transform: "translateY(75%)",
-          }}
-        >
-          {progressValue}%
-        </ThemedText>
+        {Platform.OS === "android" || "ios" ? (
+          <ThemedText
+            style={{
+              fontSize: fontSize,
+              textAlign: "center",
+              color: color,
+              transform: "translateY(75%)",
+            }}
+          >
+            {progressValue}%
+          </ThemedText>
+        ) : (
+          <SvgText
+            x="50%"
+            y="50%"
+            textAnchor="middle"
+            alignmentBaseline="middle"
+            fontSize={fontSize}
+            fontFamily="Inter"
+            fill={colors.onBackground}
+          >
+            {progressValue}%
+          </SvgText>
+        )}
       </Svg>
     </View>
   );
