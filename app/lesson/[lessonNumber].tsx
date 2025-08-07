@@ -37,66 +37,6 @@ type Question =
       imgPath?: string;
     };
 
-const renderInputQuestion = (string: string) => {
-  //console.log(string);
-
-  const elements = [];
-  let currentText = "";
-  let inputCounter = 0;
-
-  // split tags to find components
-  const segments = string.split(/(<[^>]+>)/);
-
-  for (let i = 0; i < segments.length; i++) {
-    const segment = segments[i];
-
-    if (segment.startsWith("<") && segment.endsWith(">")) {
-      // pre text
-      if (currentText) {
-        elements.push(
-          <ThemedText key={`text_${i}`} style={{ fontSize: 32 }}>
-            {currentText}
-          </ThemedText>
-        );
-        currentText = "";
-      }
-
-      // parse inputs
-      if (segment.includes("NumberInput")) {
-        const match = segment.match(/correct=(\d+)/);
-        if (match)
-          elements.push(<NumberInput key={`number_${inputCounter++}`} />);
-      } else if (segment.includes("TextInput")) {
-        const match = segment.match(/correct="([^"]+)"/);
-        if (match)
-          elements.push(<TextInputQuestion key={`text_${inputCounter++}`} />);
-      }
-    } else {
-      currentText += segment;
-    }
-  }
-
-  // post text
-  if (currentText) {
-    elements.push(
-      <ThemedText style={{ fontSize: 32 }}>{currentText}</ThemedText>
-    );
-  }
-
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "center",
-        marginVertical: 24,
-      }}
-    >
-      {elements}
-    </View>
-  );
-};
-
 const LessonScreen = () => {
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -109,12 +49,221 @@ const LessonScreen = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [lessonName, setLessonName] = useState("");
 
+  // input questions
+  const [allCorrect, setAllCorrect] = useState(false);
+  const [inputsEmpty, setInputsEmpty] = useState(true);
+  const [userAnswers, setUserAnswers] = useState<boolean[]>([]);
+  const [inputStates, setInputStates] = useState<boolean[]>([]);
+  const [correctAnswers, setCorrectAnswers] = useState<(string | number)[]>([]);
+  const [showAnswers, setShowAnswers] = useState(false);
+
   const router = useRouter();
   const { colors, dark } = useTheme();
+
+  const checkAllAnswers = () => {
+    if (userAnswers.length && userAnswers.every(Boolean)) {
+      setAllCorrect(true);
+      console.log(true);
+    } else {
+      setAllCorrect(false);
+      console.log(false);
+    }
+  };
+
+  const checkAllEmpty = () => {
+    if (inputStates.length && inputStates.includes(false)) {
+      setInputsEmpty(true);
+      console.log("All empty: true");
+      console.log(inputStates);
+    } else {
+      setInputsEmpty(false);
+      console.log(inputStates);
+      console.log("All empty: false");
+    }
+  };
+
+  useEffect(() => {
+    checkAllAnswers();
+  }, [userAnswers]);
+
+  useEffect(() => {
+    checkAllEmpty();
+  }, [inputStates]);
+
+  const onAnswer = (index: number, isCorrect: boolean) => {
+    setUserAnswers((prev) => {
+      const newAnswers = [...prev];
+      newAnswers[index] = isCorrect;
+      return newAnswers;
+    });
+  };
+
+  const handleInputEmpty = (index: number, isEmpty: boolean) => {
+    setInputStates((prev) => {
+      const newAnswers = [...prev];
+      newAnswers[index] = isEmpty;
+      return newAnswers;
+    });
+  };
+
+  const renderInputQuestion = (string: string) => {
+    const elements = [];
+    let currentText = "";
+    let inputCounter = 0;
+
+    const segments = string.split(/(<[^>]+>)/);
+
+    for (let i = 0; i < segments.length; i++) {
+      const segment = segments[i];
+
+      if (segment.startsWith("<") && segment.endsWith(">")) {
+        if (currentText) {
+          elements.push(
+            <ThemedText key={`text_${i}`} style={{ fontSize: 32 }}>
+              {currentText}
+            </ThemedText>
+          );
+          currentText = "";
+        }
+
+        if (segment.includes("NumberInput")) {
+          const match = segment.match(/correct=(\d+)/);
+          if (match) {
+            const correctValue = parseInt(match[1], 10);
+            const index = inputCounter++;
+
+            if (userAnswers.length <= index) {
+              setUserAnswers((prev) => {
+                const newAnswers = [...prev];
+                while (newAnswers.length <= index) {
+                  newAnswers.push(false);
+                }
+                return newAnswers;
+              });
+            }
+
+            if (inputStates.length <= index) {
+              setInputStates((prev) => {
+                const newStates = [...prev];
+                while (newStates.length <= index) {
+                  newStates.push(false);
+                }
+                return newStates;
+              });
+            }
+
+            if (correctAnswers.length <= index) {
+              setCorrectAnswers((prev) => {
+                const newCorrectAnswers = [...prev];
+                while (newCorrectAnswers.length <= index) {
+                  newCorrectAnswers.push("");
+                }
+                newCorrectAnswers[index] = correctValue;
+                return newCorrectAnswers;
+              });
+            }
+
+            elements.push(
+              <NumberInput
+                key={`numberinput_${index}`}
+                correct={correctValue}
+                onAnswer={(isCorrect: boolean) => onAnswer(index, isCorrect)}
+                onEmpty={(isEmpty: boolean) => handleInputEmpty(index, isEmpty)}
+                showAnswer={showAnswers}
+                isCorrect={userAnswers[index]}
+              />
+            );
+          }
+        } else if (segment.includes("TextInput")) {
+          const match = segment.match(/correct="([^"]+)"/);
+          if (match) {
+            const correctValue = match[1];
+            const index = inputCounter++;
+
+            if (userAnswers.length <= index) {
+              setUserAnswers((prev) => {
+                const newAnswers = [...prev];
+                while (newAnswers.length <= index) {
+                  newAnswers.push(false);
+                }
+                return newAnswers;
+              });
+            }
+
+            if (inputStates.length <= index) {
+              setInputStates((prev) => {
+                const newStates = [...prev];
+                while (newStates.length <= index) {
+                  newStates.push(false);
+                }
+                return newStates;
+              });
+            }
+
+            if (correctAnswers.length <= index) {
+              setCorrectAnswers((prev) => {
+                const newCorrectAnswers = [...prev];
+                while (newCorrectAnswers.length <= index) {
+                  newCorrectAnswers.push("");
+                }
+                newCorrectAnswers[index] = correctValue;
+                return newCorrectAnswers;
+              });
+            }
+
+            elements.push(
+              <TextInputQuestion
+                key={`textinput_${index}`}
+                correct={correctValue}
+                onAnswer={(isCorrect: boolean) => onAnswer(index, isCorrect)}
+                onEmpty={(isEmpty: boolean) => handleInputEmpty(index, isEmpty)}
+                showAnswer={showAnswers}
+                isCorrect={userAnswers[index]}
+              />
+            );
+          }
+        }
+      } else {
+        currentText += segment;
+      }
+    }
+
+    if (currentText) {
+      elements.push(
+        <ThemedText key="finalText" style={{ fontSize: 32 }}>
+          {currentText}
+        </ThemedText>
+      );
+    }
+
+    return (
+      <View
+        style={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          marginVertical: 24,
+        }}
+      >
+        {elements}
+      </View>
+    );
+  };
 
   useEffect(() => {
     loadLesson();
   }, []);
+
+  useEffect(() => {
+    if (currentIndex !== undefined) {
+      setUserAnswers([]);
+      setAllCorrect(false);
+      setInputStates([]);
+      setInputsEmpty(true);
+      setCorrectAnswers([]);
+      setShowAnswers(false);
+    }
+  }, [currentIndex]);
 
   const loadLesson = async () => {
     try {
@@ -168,6 +317,7 @@ const LessonScreen = () => {
 
   const handleAnswer = (correct: boolean) => {
     setHasAnswered(true);
+    setShowAnswers(true);
     if (hasAnswered) return;
     if (correct) setCorrectlyAnswered((prev) => prev + 1);
     else addQuestionToList();
@@ -401,9 +551,31 @@ const LessonScreen = () => {
                     </Button>
                   </>
                 ) : (
-                  <ThemedText style={{ fontSize: 32, marginVertical: 24 }}>
-                    {renderInputQuestion(questions[currentIndex as number].ot)}
-                  </ThemedText>
+                  <>
+                    <ThemedText style={{ fontSize: 32, marginVertical: 24 }}>
+                      {renderInputQuestion(
+                        questions[currentIndex as number].ot
+                      )}
+                    </ThemedText>
+                    <Button
+                      labelStyle={{ fontFamily: "Inter" }}
+                      mode="contained"
+                      disabled={inputsEmpty}
+                      style={{
+                        backgroundColor: "#155dfc",
+                        opacity: inputsEmpty ? 0.5 : 1,
+                        pointerEvents: inputsEmpty ? "none" : "auto",
+                        marginBottom: 12,
+                      }}
+                      textColor="white"
+                      onPress={() => {
+                        if (hasAnswered) handleContinue();
+                        else handleAnswer(allCorrect);
+                      }}
+                    >
+                      {hasAnswered ? "Pokračovat" : "Zkontrolovat"}
+                    </Button>
+                  </>
                 )}
 
                 {questions[currentIndex]["imgPath"] && (

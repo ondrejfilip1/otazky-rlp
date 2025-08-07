@@ -19,7 +19,7 @@ const HomeScreen = () => {
   const load = async () => {
     const hardQuestionsData = await AsyncStorage.getItem("hardQuestions");
     if (hardQuestionsData) setHardQuestions(JSON.parse(hardQuestionsData));
-    console.log(hardQuestionsData);
+    //console.log(hardQuestionsData);
   };
 
   return (
@@ -71,14 +71,22 @@ const HomeScreen = () => {
           <Brain style={{ marginLeft: "auto" }} color={colors.onBackground} />
         </View>
         <View style={{ gap: 12 }}>
-          {Object.entries(hardQuestions).map(([lessonID, questions]) => (
-            <LessonBox
-              name={LessonList[lessonID].nazev}
-              lessonID={`${lessonID}?hardLesson=true`}
-              questionCount={Array.isArray(questions) ? questions.length : 0}
-              key={lessonID}
-            />
-          ))}
+          {Object.keys(hardQuestions).length === 0 ? (
+            <ThemedText style={{textAlign: "center", opacity: 0.6, marginVertical: 24}}>Nemáte žádné problémové otázky</ThemedText>
+          ) : (
+            <>
+              {Object.entries(hardQuestions).map(([lessonID, questions]) => (
+                <LessonBox
+                  name={LessonList[lessonID].nazev}
+                  lessonID={`${lessonID}?hardLesson=true`}
+                  questionCount={
+                    Array.isArray(questions) ? questions.length : 0
+                  }
+                  key={lessonID}
+                />
+              ))}
+            </>
+          )}
         </View>
       </SafeAreaView>
     </View>
