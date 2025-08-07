@@ -505,7 +505,7 @@ const LessonScreen = () => {
                             <ThemedText
                               style={{ fontSize: 24, marginRight: 12 }}
                             >
-                              {["A", "B", "C"][index]}
+                              {["A", "B", "C", "D", "E"][index]}
                             </ThemedText>
                             <ThemedText
                               style={{ fontSize: 14, flexShrink: 1, flex: 1 }}
@@ -542,6 +542,7 @@ const LessonScreen = () => {
                         backgroundColor: "#155dfc",
                         visibility: hasAnswered ? "visible" : "hidden",
                         pointerEvents: hasAnswered ? "auto" : "none",
+                        opacity: hasAnswered ? 1 : 0,
                         marginBottom: 12,
                       }}
                       textColor="white"
