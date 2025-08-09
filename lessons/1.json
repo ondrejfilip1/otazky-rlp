@@ -1,138 +1,459 @@
 {
-  "nazev": "Řízení letového provozu - Základní znalosti",
+  "nazev": "Test TT APP 2025",
   "otazky": [
     {
-      "ot": "Co je hlavní úlohou řízení letového provozu?",
-      "od1": "Zajišťovat bezpečnost, plynulost a efektivitu letového provozu",
-      "od2": "Kontrolovat pasy cestujících",
-      "od3": "Provádět údržbu letadel",
-      "spr": "od1"
-    },
-    {
-      "ot": "Jaká je zkratka pro řízení letového provozu?",
-      "od1": "ATP",
-      "od2": "ATC",
-      "od3": "ATS",
+      "ot": "Kolik mám dní na odvolání v případě nesouhlasu s výsledkem zkoušky?",
+      "od1": "2",
+      "od2": "3",
+      "od3": "5",
       "spr": "od2"
     },
     {
-      "ot": "Jaký je primární komunikační jazyk v mezinárodním letectví?",
-      "od1": "Francouzština",
-      "od2": "Němčina",
-      "od3": "Angličtina",
+      "ot": "Kolik možných termínů má žák na zkoušky?",
+      "od1": "2 řádné, 1 možnost ověření ÚCL",
+      "od2": "1 řádný, 2 opravné",
+      "od3": "1 řádný, 1 opravný, 1 možnost ověření ÚCL",
       "spr": "od3"
     },
     {
-      "ot": "K čemu slouží letová informační služba (FIS)?",
-      "od1": "K navigaci po letištní ploše",
-      "od2": "K poskytování informací o počasí a provozu",
-      "od3": "K plánování servisu letadel",
-      "spr": "od2"
+      "ot": "Metody výcviku v TT jsou:",
+      "od1": "Samostudium",
+      "od2": "Teoretická výuka v učebně",
+      "od3": "Praktický výcvik",
+      "od4": "Přehrávky",
+      "spr": [
+        "od1",
+        "od2",
+        "od3"
+      ]
     },
     {
-      "ot": "Co znamená zkratka IFR?",
-      "od1": "Instrument Flight Rules",
-      "od2": "International Flight Regulation",
-      "od3": "Integrated Flight Radar",
+      "ot": "APP Praha poskytuje v CTA 1 ATS letům:",
+      "od1": "Kombi Y/Z",
+      "od2": "VFR",
+      "od3": "IFR",
+      "spr": [
+        "od1",
+        "od3"
+      ]
+    },
+    {
+      "ot": "Horní vertikální hranice (v ft AMSL) CTR Vodochydy je:",
+      "od1": "3500",
+      "od2": "3000",
+      "od3": "2500",
       "spr": "od1"
     },
     {
-      "ot": "Kdo má hlavní odpovědnost za separaci letadel ve vzduchu?",
-      "od1": "Pilot",
-      "od2": "Letištní pracovník",
-      "od3": "Řídící letového provozu",
+      "ot": "Horní vertikální hranice (v ft AMSL) CTR Kbely je:",
+      "od1": "2000",
+      "od2": "2500",
+      "spr": "od1"
+    },
+    {
+      "ot": "Prostor pod TMA VIII Praha je v případě nečinnosti VO třída prostoru:",
+      "od1": "G",
+      "od2": "E",
+      "od3": "G+E",
       "spr": "od3"
     },
     {
-      "ot": "Jaká služba se poskytuje v řízeném vzdušném prostoru?",
-      "od1": "Poradenská služba",
-      "od2": "Řídící služba",
-      "od3": "Zdravotní služba",
-      "spr": "od2"
+      "ot": "V případě použití RADAR1Y SID z LKVO musím:",
+      "od1": "Zastavit odlety propů na ARTUP/VENOX",
+      "od2": "Ošetřit vzlety propů na ARTUP/VENOX vůči SID",
+      "od3": "Dát na VO změnu kurzu RADAR1Y vůči mým odletům",
+      "od4": "Nic, PROP SID má publikovaný gradient vůči VO",
+      "spr": "od2",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403716972222349383/image.png?ex=689890cd&is=68973f4d&hm=af50d188e36af10fda3e8aa39694e0c2070c69587d6b67a8ab0e9b21a13eb3cb&"
     },
     {
-      "ot": "Jaká zkratka označuje radarové řízení přibližování?",
-      "od1": "TWR",
-      "od2": "ACC",
-      "od3": "APP",
+      "ot": "Mimo provozní dobu LKVO se prostor TMA I VO stává vzdušným prostorem třídy:",
+      "od1": "C",
+      "od2": "D",
+      "od3": "E",
+      "od4": "G",
       "spr": "od3"
     },
     {
-      "ot": "Co znamená squawk kód 7500?",
-      "od1": "Technická závada",
-      "od2": "Únos letadla",
-      "od3": "Nouzové přistání",
+      "ot": "Mimo provozní dobu LKVO se prostor TMA II VO stává vzdušným prostorem třídy:",
+      "od1": "C",
+      "od2": "D",
+      "od3": "E",
+      "spr": "od1"
+    },
+    {
+      "ot": "Jak zjistím, že jsou aktivní VO?",
+      "od1": "123,030",
+      "od2": "132,020",
+      "od3": "Napíšu Stanleymu na Instagramu",
+      "od4": "Z Vodochodského ATISu",
+      "spr": "od1"
+    },
+    {
+      "ot": "Rychlostní omezení přiblížení do LKPR Group má omezení",
+      "od1": "250kt IAS JET, 180kt IAS Prop",
+      "od2": "FL100B",
+      "od3": "250kt IAS",
+      "od4": "FL165B",
+      "spr": [
+        "od2",
+        "od3"
+      ]
+    },
+    {
+      "ot": "Uveďte , v jakých fázích letu, včetně vertikálního vymezení, se musí uplatňovat minima vzdálenostních rozstupů podle WTC (2 odpovědi)",
+      "od1": "Vzlet GND-5000ft AMSL",
+      "od2": "Přílet nejnižší možný FL-GND",
+      "od3": "Vzlet GND-nejnižší možný FL",
+      "od4": "Přílet 5000ft AMSL - GND",
+      "spr": [
+        "od1",
+        "od4"
+      ]
+    },
+    {
+      "ot": "Nejnižší letová hladina při Q1013 je:",
+      "od1": "FL60",
+      "od2": "FL70",
       "spr": "od2"
     },
     {
-      "ot": "K čemu slouží sekundární radar (SSR)?",
-      "od1": "Zobrazuje počasí v okolí",
-      "od2": "Identifikuje letadla pomocí transpondéru",
-      "od3": "Měří výšku pomocí barometrického tlaku",
-      "spr": "od2"
-    },
-    {
-      "ot": "Jaká služba se poskytuje ve třídě vzdušného prostoru G?",
-      "od1": "Řídící služba",
-      "od2": "Žádná",
-      "od3": "Letová informační služba",
+      "ot": "Prostor LKP1 má horní hranici: (Odpověď ve ft AMSL)",
+      "od1": "2000",
+      "od2": "3000",
+      "od3": "4000",
+      "od4": "5000",
       "spr": "od3"
     },
     {
-      "ot": "Co znamená výraz „cleared for takeoff“?",
-      "od1": "Letadlo má povolení zahájit vzlet",
-      "od2": "Letadlo má přistát",
-      "od3": "Letadlo musí čekat",
+      "ot": "Prostor LKP4 má horní hranici: (Odpověď ve ft AMSL)",
+      "od1": "2000",
+      "od2": "3000",
+      "od3": "4000",
+      "od4": "5000",
+      "spr": "od4"
+    },
+    {
+      "ot": "Prostor LKP5 má horní hranici: (Odpověď ve ft AMSL)",
+      "od1": "2500",
+      "od2": "3000",
+      "od3": "4000",
+      "od4": "5000",
+      "spr": "od4"
+    },
+    {
+      "ot": "Prostor LKP11 má horní hranici: (Odpověď ve ft AMSL)",
+      "od1": "2000",
+      "od2": "2500",
+      "od3": "3000",
+      "od4": "3500",
       "spr": "od1"
     },
     {
-      "ot": "K čemu slouží věžová služba (TWR)?",
-      "od1": "Řídí provoz ve vzduchu v celém státě",
-      "od2": "Řídí pohyb letadel na zemi a v okolí letiště",
-      "od3": "Řídí navigaci přes oceán",
-      "spr": "od2"
-    },
-    {
-      "ot": "Jaký kód znamená všeobecné nouzové volání?",
-      "od1": "PAN PAN",
-      "od2": "MAYDAY",
-      "od3": "SOS",
-      "spr": "od2"
-    },
-    {
-      "ot": "Jaký je účel letového plánu?",
-      "od1": "Urychlení odbavení cestujících",
-      "od2": "Informace pro řízení o zamýšleném letu",
-      "od3": "Pojištění letadla",
-      "spr": "od2"
-    },
-    {
-      "ot": "Jak se říká prostoru, kde je provoz řízen ACC?",
-      "od1": "Řízený vzdušný prostor",
-      "od2": "Letová zóna",
-      "od3": "Zákazový prostor",
+      "ot": "Prostor LKP12 má horní hranici: (Odpověď ve ft AMSL)",
+      "od1": "2000",
+      "od2": "2500",
+      "od3": "3000",
+      "od4": "3500",
       "spr": "od1"
     },
     {
-      "ot": "Co znamená zkratka VFR?",
-      "od1": "Visual Flight Rules",
-      "od2": "Vertical Flight Record",
-      "od3": "Verified Flight Response",
+      "ot": "Prostor LKP1 má jméno:",
+      "od1": "Praha",
+      "od2": "Pražský Hrad",
+      "od3": "Hlavní nádraží",
+      "spr": "od2"
+    },
+    {
+      "ot": "Prostor LKP4 má horizontální tvar a jméno:",
+      "od1": "Vlašim, trojúhelník",
+      "od2": "Prčice, kružnice",
+      "od3": "Vlašim, kružnice",
+      "od4": "Prčice, trojúhelník",
       "spr": "od1"
     },
     {
-      "ot": "Kdo odpovídá za navigaci při VFR letu?",
-      "od1": "Řídící letového provozu",
-      "od2": "Pilot",
-      "od3": "Mechanik",
+      "ot": "Prostor LKP5 má horizontální tvar a jméno:",
+      "od1": "Vlašim, trojúhelník",
+      "od2": "Prčice, kružnice",
+      "od3": "Vlašim, kružnice",
+      "od4": "Prčice, trojúhelník",
       "spr": "od2"
     },
     {
-      "ot": "Jaká fráze se používá pro potvrzení příjmu pokynu od ATC?",
-      "od1": "Confirm",
-      "od2": "Roger",
-      "od3": "Okay",
+      "ot": "Prostor LKP11 má jméno:",
+      "od1": "Řež",
+      "od2": "Neratovice",
       "spr": "od2"
+    },
+    {
+      "ot": "Prostor LKP12 má jméno:",
+      "od1": "Řež",
+      "od2": "Neratovice",
+      "spr": "od1"
+    },
+    {
+      "ot": "Vyplň (NA PAPÍR) 5 podmínek vstupu do LKR9:",
+      "od1": "Vím",
+      "od2": "Nevím",
+      "spr": "od1"
+    },
+    {
+      "ot": "Vyplň (NA PAPÍR) 5 podmínek vstupu do LKP1, kromě smlouvy o otevřeném nebi",
+      "od1": "Vím",
+      "od2": "Nevím",
+      "spr": "od1"
+    },
+    {
+      "ot": "Základna oblačnosti se počítá od:",
+      "od1": "Nadmořské výšky",
+      "od2": "Výšky letiště",
+      "spr": "od2"
+    },
+    {
+      "ot": "Může letadlo provést VIS APP při Cloud Base OVC 3000ft?",
+      "od1": "Ne, potřebuje alespoň 4100ft, aby mohlo letět 100ft pod mrakem",
+      "od2": "Ano, 3000ft base znamená, že mraky začínají na 4200ft AMSL",
+      "od3": "Ne, letadlo potřebuje být 500ft pod mrakem",
+      "od4": "Ano, ale musím počkat na klesání do 3000ft v TMA I Praha",
+      "spr": "od2"
+    },
+    {
+      "ot": "Letadlo letící na IAF po jeho minutí má letět:",
+      "od1": "Pokračováním STAR",
+      "od2": "Trackem publikovaným v IAC",
+      "od3": "Present heading",
+      "spr": "od2"
+    },
+    {
+      "ot": "WTC - L za M držíme:",
+      "od1": "3 NM",
+      "od2": "4 NM",
+      "od3": "5 NM",
+      "od4": "6 NM",
+      "spr": "od3"
+    },
+    {
+      "ot": "WTC - M za M držíme:",
+      "od1": "nic",
+      "od2": "5 NM",
+      "spr": "od1"
+    },
+    {
+      "ot": "WTC - M za H držíme:",
+      "od1": "4 NM",
+      "od2": "5 NM",
+      "od3": "6 NM",
+      "od4": "7 NM",
+      "spr": "od2"
+    },
+    {
+      "ot": "WTC - L za H držíme:",
+      "od1": "4 NM",
+      "od2": "5 NM",
+      "od3": "6 NM",
+      "spr": "od3"
+    },
+    {
+      "ot": "WTC - H za H držíme:",
+      "od1": "Nic",
+      "od2": "4 NM",
+      "od3": "5 NM",
+      "spr": "od2"
+    },
+    {
+      "ot": "WTC - H za J držíme:",
+      "od1": "4 NM",
+      "od2": "5 NM",
+      "od3": "6 NM",
+      "od4": "7 NM",
+      "spr": "od3"
+    },
+    {
+      "ot": "WTC - M za J držíme:",
+      "od1": "5 NM",
+      "od2": "6 NM",
+      "od3": "7 NM",
+      "od4": "8 NM",
+      "spr": "od3"
+    },
+    {
+      "ot": "WTC - L za J držíme:",
+      "od1": "5 NM",
+      "od2": "6 NM",
+      "od3": "7 NM",
+      "od4": "8 NM",
+      "spr": "od4"
+    },
+    {
+      "ot": "WTC - J za J držíme:",
+      "od1": "Nic",
+      "od2": "4 NM",
+      "od3": "5 NM",
+      "od4": "6 NM",
+      "spr": "od1"
+    },
+    {
+      "ot": "Letadlo bez RNAV do LKPR:",
+      "od1": "Musíme vektorovat",
+      "od2": "Nevpustíme do TMA",
+      "spr": "od1"
+    },
+    {
+      "ot": "Kdy mohu opustit pracoviště APP? (multiple-choice)",
+      "od1": "WS nás propustí",
+      "od2": "SC nás propustí",
+      "od3": "Naše pracoviště bylo sloučeno do jiného",
+      "od4": "Byli jsme vystřídáni",
+      "spr": [
+        "od2",
+        "od3",
+        "od4"
+      ]
+    },
+    {
+      "ot": "CRC znamená:",
+      "od1": "Coordinated Rescue Center",
+      "od2": "Control & Reporting Center",
+      "spr": "od2"
+    },
+    {
+      "ot": "RCC znamená",
+      "od1": "Rescue Coordination Center",
+      "od2": "Report & Command Center",
+      "od3": ""
+    },
+    {
+      "ot": "PENV znamená:",
+      "od1": "Environmentální postupy",
+      "od2": "En-route Aviation Procedures",
+      "od3": "Professional environment",
+      "spr": "od3"
+    },
+    {
+      "ot": "Druhy přiblížení - LKCV RWY 31",
+      "od1": "ILS",
+      "od2": "RNP",
+      "od3": "VOR",
+      "od4": "NDB",
+      "od5": "ILS-DME",
+      "od6": "VIS",
+      "spr": [
+        "od4",
+        "od5",
+        "od6"
+      ]
+    },
+    {
+      "ot": "Druhy přiblížení - LKCV RWY 13",
+      "od1": "ILS31 circling 13",
+      "od2": "RNP",
+      "od3": "VOR",
+      "od4": "NDB",
+      "od5": "ILS-DME",
+      "od6": "VIS",
+      "spr": [
+        "od1",
+        "od4",
+        "od6"
+      ]
+    },
+    {
+      "ot": "Druhy přiblížení - LKKV RWY 11",
+      "od1": "ILS",
+      "od2": "RNP",
+      "od3": "VOR",
+      "od4": "NDB",
+      "od5": "ILS29 circling 11",
+      "od6": "VIS",
+      "spr": [
+        "od4",
+        "od5",
+        "od6"
+      ]
+    },
+    {
+      "ot": "Druhy přiblížení - LKKV RWY 29",
+      "od1": "ILS",
+      "od2": "RNP",
+      "od3": "VOR",
+      "od4": "NDB",
+      "od5": "ILS11 circling 29",
+      "od6": "VIS",
+      "spr": [
+        "od1",
+        "od2",
+        "od4",
+        "od6"
+      ]
+    },
+    {
+      "ot": "Druhy přiblížení - LKKB RWY 06",
+      "od1": "ILS",
+      "od2": "RNP",
+      "od3": "VOR",
+      "od4": "NDB",
+      "od5": "ILS24 circling 06",
+      "od6": "VIS",
+      "spr": [
+        "od5",
+        "od6"
+      ]
+    },
+    {
+      "ot": "Druhy přiblížení - LKKB RWY 24",
+      "od1": "ILS",
+      "od2": "RNP",
+      "od3": "VOR",
+      "od4": "NDB",
+      "od5": "ILS06 circling 24",
+      "od6": "VIS",
+      "spr": [
+        "od1",
+        "od4",
+        "od6"
+      ]
+    },
+    {
+      "ot": "Druhy přiblížení - LKVO RWY 10",
+      "od1": "ILS",
+      "od2": "RNP",
+      "od3": "VOR",
+      "od4": "NDB",
+      "od5": "ILS29 circling 10",
+      "od6": "VIS",
+      "spr": [
+        "od2",
+        "od4",
+        "od6"
+      ]
+    },
+    {
+      "ot": "Druhy přiblížení - LKVO RWY 29",
+      "od1": "ILS",
+      "od2": "RNP",
+      "od3": "VOR",
+      "od4": "NDB",
+      "od5": "ILS10 circling 29",
+      "od6": "VIS",
+      "spr": [
+        "od1",
+        "od2",
+        "od4",
+        "od6"
+      ]
+    },
+    {
+      "ot": "Zkratka HX znamená ",
+      "od1": "Mimo provoz",
+      "od2": "Provozní doba nespecifikovaná",
+      "spr": "od2"
+    },
+    {
+      "ot": "",
+      "od1": "",
+      "od2": "",
+      "od3": ""
     }
   ]
 }
