@@ -450,12 +450,6 @@
       "spr": "od2"
     },
     {
-      "ot": "",
-      "od1": "",
-      "od2": "",
-      "od3": ""
-    },
-        {
       "ot": "Bod 1: <TextInput correct=\"GOPSI\"/> Bod 2: <TextInput correct=\"YUJKI\"/> BOD 3: <TextInput correct=\"ODPAL\"/>",
       "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403779183322337332/body1.png?ex=6898cabe&is=6897793e&hm=41904ab2715229052aee7881a4f3ba0129f575449a846ec297824e33ebd4f8a0&"
     },
