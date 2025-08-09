@@ -454,6 +454,158 @@
       "od1": "",
       "od2": "",
       "od3": ""
+    },
+        {
+      "ot": "Bod 1: <TextInput correct=\"GOPSI\"/> Bod 2: <TextInput correct=\"YUJKI\"/> BOD 3: <TextInput correct=\"ODPAL\"/>",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403779183322337332/body1.png?ex=6898cabe&is=6897793e&hm=41904ab2715229052aee7881a4f3ba0129f575449a846ec297824e33ebd4f8a0&"
+    },
+    {
+      "ot": "Bod 1: <TextInput correct=\"SULOV\"/> Bod 2: <TextInput correct=\"UTORO\"/>",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403780105469300816/image.png?ex=6898cb9a&is=68977a1a&hm=b99bad73b61a4d6e20ee10011bd91562280a4961f0dd43584ffa9da38a6b5392&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "BAROX",
+      "od2": "ELMEK",
+      "od3": "EROKA",
+      "spr": "od3",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403780588606853181/image.png?ex=6898cc0d&is=68977a8d&hm=664547e2d5eb405bc9e74be36749f0d4902720f7ea8e84d1d28376d8b24f3820&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "ELPON",
+      "od2": "KENOK",
+      "od3": "ARVEG",
+      "spr": "od1",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403780966979207208/image.png?ex=6898cc67&is=68977ae7&hm=97ce3c7b8dc32b5cba6664cd2d148563b0eb977a3138ff5667c91ae98217d371&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "EVIKU",
+      "od2": "BAGRU",
+      "od3": "SULOV",
+      "spr": "od1",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403781403866304703/image.png?ex=6898cccf&is=68977b4f&hm=53c57cd4795ec8ebb2381c2aa4f2a580f02d0fda00ebfcf460a650b252901363&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "EROKA",
+      "od2": "EVEMI",
+      "od3": "SOMIS",
+      "spr": "od2",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403781658334859274/image.png?ex=6898cd0c&is=68977b8c&hm=360bbfeb34271bfabc247d422e4454ef0fa6f04194b29bd2ce6b88ed53777b84&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "LEGAZ",
+      "od2": "LEMBI",
+      "od3": "BULEK",
+      "spr": "od1",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403782265900630116/image.png?ex=6898cd9d&is=68977c1d&hm=b15a65e4c2cdd4b1beedc75bb527ce5f91ff7a3a8a3c9c2258bfcf0133945647&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "ARTUP",
+      "od2": "EVIKU",
+      "od3": "ODLIV",
+      "spr": "od3",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403782724845834290/image.png?ex=6898ce0a&is=68977c8a&hm=b339e3e311c78d3026ab2c7c06ee0629552b489113b45964e518ff4b0c5d8f1a&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "LAGAR",
+      "od2": "RASAN",
+      "od3": "TOMTI",
+      "spr": "od1",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403783229303165090/image.png?ex=6898ce82&is=68977d02&hm=5bd092c68c600a89b2f44b0bdc28b5281e024ff27a063163f5dadccecdbb62d1&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "LAGAR",
+      "od2": "RASAN",
+      "od3": "TOMTI",
+      "spr": "od3",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403783497352482960/image.png?ex=6898cec2&is=68977d42&hm=a9d7f0c72680f8771118546fde9c40d3aa1be5be316fa57331677cd1219cc555&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "LAGAR",
+      "od2": "TOMTI",
+      "od3": "RASAN",
+      "spr": "od3",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403783748322983936/image.png?ex=6898cefe&is=68977d7e&hm=7219a0e5e0313f2224f30f70667ec08d43e34ccfc2a9f0b92fde7e4c8f5c0a31&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "LALUK",
+      "od2": "OMELO",
+      "od3": "DEKOV",
+      "spr": "od1",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403784128066879620/image.png?ex=6898cf59&is=68977dd9&hm=486e351cb36cfee7244a20b7e17af2045425b8f0613403793845d7022b310ca3&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "LALUK",
+      "od2": "OMELO",
+      "od3": "DEKOV",
+      "spr": "od2",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403784361588949093/image.png?ex=6898cf90&is=68977e10&hm=e1e97d0a02b8b21e85d576ebcac59fd796bc2e5f8d5b0bc8b179a19a18c2b8fc&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "LALUK",
+      "od2": "OMELO",
+      "od3": "DEKOV",
+      "spr": "od3",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403784468149305374/image.png?ex=6898cfaa&is=68977e2a&hm=153980ab5fef84c1e019bff9617ca713adcc2b28465fc8357d0739e755042ab4&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "ASTEL",
+      "od2": "BEFRE",
+      "od3": "RAVKU",
+      "spr": "od1",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403786341556158484/image.png?ex=6898d168&is=68977fe8&hm=7128a2cdc2d387ff6d0ce1c07f5905e71f5c97e795bb8ca5ac832cc125fdde68&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "ASTEL",
+      "od2": "BEFRE",
+      "od3": "RAVKU",
+      "spr": "od2",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403786586763563078/image.png?ex=6898d1a3&is=68978023&hm=ee731a9c00b09e828ffcd2598a9156f9d9bbbc25ab6dbddcd2431c41830864c4&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "EKROT",
+      "od2": "GOLIN",
+      "od3": "BEKVI",
+      "spr": "od3",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403786974556327977/image.png?ex=6898d1ff&is=6897807f&hm=c008b267569c36f37c39dc9629c9fedf3055b6b83b7252449e8fa70462311afc&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "EKROT",
+      "od2": "GOLIN",
+      "od3": "BEKVI",
+      "spr": "od1",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403787304304381982/image.png?ex=6898d24e&is=689780ce&hm=59f04a7a2bd367c47162f7b1895d9a845f78e7ded1d8984df9665743463d64f7&"
+    },
+    {
+      "ot": "Název bodu?",
+      "od1": "BEKVI",
+      "od2": "EKROT",
+      "od3": "GOLIN",
+      "spr": "od1",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403787523813146767/image.png?ex=6898d282&is=68978102&hm=b2dc0c2417ace6fd19720846507e4ab4ad5fa738d214548e6f82cc2ad1907e22&"
+    },
+    {
+      "ot": "Jaká je spodní hranice?",
+      "od1": "2000",
+      "od2": "2500",
+      "od3": "3500",
+      "spr": "od2",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1403787902122463385/image.png?ex=6898d2dc&is=6897815c&hm=3104d1fdebfeeb5a46804ae45df1121dd956bd1e6680854ae8e81dfafa504a1b&"
     }
   ]
 }
