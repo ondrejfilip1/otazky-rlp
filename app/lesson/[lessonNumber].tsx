@@ -71,9 +71,11 @@ const LessonScreen = () => {
     }
   };
 
+  /*
   useEffect(() => {
     console.log(selectedAnswers);
   }, [selectedAnswers]);
+  */
 
   const router = useRouter();
   const { colors, dark } = useTheme();
@@ -519,7 +521,7 @@ const LessonScreen = () => {
                                 Array.isArray(questions[currentIndex]["spr"]) &&
                                 !selectedAnswers.includes(index) &&
                                 questions[currentIndex]["spr"].length <=
-                                  selectedAnswers.length
+                                  selectedAnswers.length || hasAnswered
                               }
                               style={{
                                 opacity:
@@ -595,7 +597,9 @@ const LessonScreen = () => {
                                 {hasAnswered && (
                                   <>
                                     {"spr" in questions[currentIndex] &&
-                                    questions[currentIndex]["spr"] === value ? (
+                                        questions[currentIndex]["spr"].includes(
+                                          `od${index + 1}`
+                                        ) ? (
                                       <Check
                                         color={
                                           dark
@@ -660,7 +664,6 @@ const LessonScreen = () => {
                                           "od3",
                                           "od4",
                                           "od5",
-                                          ,
                                           "od6",
                                           "od7",
                                         ].indexOf(ans)
@@ -680,7 +683,7 @@ const LessonScreen = () => {
                         >
                           {questions[currentIndex].ot}
                         </ThemedText>
-                        {["od1", "od2", "od3", "od4", "od5"]
+                        {["od1", "od2", "od3", "od4", "od5", "od6", "od7"]
                           .filter(
                             (value) =>
                               questions[currentIndex][value as keyof Question]
