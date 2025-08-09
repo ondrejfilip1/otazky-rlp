@@ -8,7 +8,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Check, Flag, X } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import {
   Button,
   Dialog,
@@ -29,7 +29,9 @@ type Question =
       od3?: string;
       od4?: string;
       od5?: string;
-      spr: string;
+      od6?: string;
+      od7?: string;
+      spr: string | string[];
       imgPath?: string;
     }
   | {
@@ -57,28 +59,48 @@ const LessonScreen = () => {
   const [correctAnswers, setCorrectAnswers] = useState<(string | number)[]>([]);
   const [showAnswers, setShowAnswers] = useState(false);
 
+  // multiple answers
+  const [selectedAnswers, setSelectedAnswers] = useState<number[]>([]);
+
+  const toggleMultipleAnswers = (index: number, max: number) => {
+    if (selectedAnswers.includes(index))
+      setSelectedAnswers((old) => old.filter((el) => el !== index));
+    else {
+      if (selectedAnswers.length >= max) return;
+      setSelectedAnswers((old) => [...old, index]);
+    }
+  };
+
+  useEffect(() => {
+    console.log(selectedAnswers);
+  }, [selectedAnswers]);
+
   const router = useRouter();
   const { colors, dark } = useTheme();
 
   const checkAllAnswers = () => {
     if (userAnswers.length && userAnswers.every(Boolean)) {
       setAllCorrect(true);
-      console.log(true);
+      //console.log(true);
     } else {
       setAllCorrect(false);
-      console.log(false);
+      //console.log(false);
     }
   };
 
   const checkAllEmpty = () => {
     if (inputStates.length && inputStates.includes(false)) {
       setInputsEmpty(true);
+      /*
       console.log("All empty: true");
       console.log(inputStates);
+      */
     } else {
       setInputsEmpty(false);
+      /*
       console.log(inputStates);
       console.log("All empty: false");
+      */
     }
   };
 
@@ -262,6 +284,7 @@ const LessonScreen = () => {
       setInputsEmpty(true);
       setCorrectAnswers([]);
       setShowAnswers(false);
+      setSelectedAnswers([]);
     }
   }, [currentIndex]);
 
@@ -357,7 +380,7 @@ const LessonScreen = () => {
   if (loading) return <LoadingScreen description="Načítání lekce" />;
 
   return (
-    <View style={{ flex: 1, backgroundColor: colors.background }}>
+    <ScrollView style={{ flex: 1, backgroundColor: colors.background }}>
       <SafeAreaView
         style={{
           padding: 16,
@@ -460,96 +483,301 @@ const LessonScreen = () => {
               <>
                 {"spr" in questions[currentIndex] ? (
                   <>
-                    <ThemedText style={{ fontSize: 32, marginVertical: 24 }}>
-                      {questions[currentIndex].ot}
-                    </ThemedText>
-
-                    {["od1", "od2", "od3", "od4", "od5"]
-                      .filter(
-                        (value) =>
-                          questions[currentIndex][value as keyof Question]
-                      )
-                      .map((value, index) => (
-                        <TouchableOpacity
-                          activeOpacity={0.6}
-                          key={index}
-                          style={{ marginBottom: 12 }}
-                          onPress={() =>
-                            handleAnswer(
-                              "spr" in questions[currentIndex] &&
-                                questions[currentIndex]["spr"] === value
-                            )
-                          }
-                        >
-                          <View
+                    {Array.isArray(questions[currentIndex]["spr"]) ? (
+                      <>
+                        <View style={{ marginVertical: 24 }}>
+                          <ThemedText style={{ fontSize: 32 }}>
+                            {questions[currentIndex].ot}
+                          </ThemedText>
+                          <ThemedText
                             style={{
-                              backgroundColor: !hasAnswered
-                                ? dark
-                                  ? "#1e293b"
-                                  : MD2Colors.blue100
-                                : "spr" in questions[currentIndex] &&
-                                    questions[currentIndex]["spr"] === value
-                                  ? dark
-                                    ? MD2Colors.green700
-                                    : MD2Colors.green300
-                                  : dark
-                                    ? MD2Colors.red700
-                                    : MD2Colors.red300,
-                              borderRadius: 12,
-                              padding: 12,
-                              flexDirection: "row",
-                              alignItems: "center",
-                              flexWrap: "wrap",
+                              opacity: 0.7,
+                              marginTop: 8,
+                              fontSize: 16,
+                              textAlign: "center",
                             }}
                           >
-                            <ThemedText
-                              style={{ fontSize: 24, marginRight: 12 }}
+                            Vyberte {questions[currentIndex]["spr"].length}{" "}
+                            {questions[currentIndex]["spr"].length === 1
+                              ? "otázku"
+                              : questions[currentIndex]["spr"].length <= 4
+                                ? "otázky"
+                                : "otázek"}
+                          </ThemedText>
+                        </View>
+                        {["od1", "od2", "od3", "od4", "od5", "od6", "od7"]
+                          .filter(
+                            (value) =>
+                              questions[currentIndex][value as keyof Question]
+                          )
+                          .map((value, index) => (
+                            <TouchableOpacity
+                              activeOpacity={0.6}
+                              key={index}
+                              disabled={
+                                "spr" in questions[currentIndex] &&
+                                Array.isArray(questions[currentIndex]["spr"]) &&
+                                !selectedAnswers.includes(index) &&
+                                questions[currentIndex]["spr"].length <=
+                                  selectedAnswers.length
+                              }
+                              style={{
+                                opacity:
+                                  "spr" in questions[currentIndex] &&
+                                  Array.isArray(
+                                    questions[currentIndex]["spr"]
+                                  ) &&
+                                  !selectedAnswers.includes(index) &&
+                                  questions[currentIndex]["spr"].length <=
+                                    selectedAnswers.length
+                                    ? 0.6
+                                    : 1,
+                                borderWidth: 2,
+                                borderRadius: 14,
+                                borderColor: selectedAnswers.includes(index)
+                                  ? dark
+                                    ? "#374b6c"
+                                    : "#3ea2f4"
+                                  : "transparent",
+                                marginBottom: 8,
+                              }}
+                              onPress={() =>
+                                "spr" in questions[currentIndex] &&
+                                Array.isArray(questions[currentIndex]["spr"])
+                                  ? toggleMultipleAnswers(
+                                      index,
+                                      questions[currentIndex]["spr"].length
+                                    )
+                                  : undefined
+                              }
                             >
-                              {["A", "B", "C", "D", "E"][index]}
-                            </ThemedText>
-                            <ThemedText
-                              style={{ fontSize: 14, flexShrink: 1, flex: 1 }}
-                            >
-                              {questions[currentIndex][value as keyof Question]}
-                            </ThemedText>
-                            {hasAnswered && (
-                              <>
-                                {"spr" in questions[currentIndex] &&
-                                questions[currentIndex]["spr"] === value ? (
-                                  <Check
-                                    color={
-                                      dark
-                                        ? MD2Colors.green200
-                                        : MD2Colors.green800
-                                    }
-                                  />
-                                ) : (
-                                  <X
-                                    color={
-                                      dark ? MD2Colors.red200 : MD2Colors.red800
-                                    }
-                                  />
+                              <View
+                                style={{
+                                  backgroundColor: !hasAnswered
+                                    ? dark
+                                      ? "#1e293b"
+                                      : MD2Colors.blue100
+                                    : "spr" in questions[currentIndex] &&
+                                        questions[currentIndex]["spr"].includes(
+                                          `od${index + 1}`
+                                        )
+                                      ? dark
+                                        ? MD2Colors.green700
+                                        : MD2Colors.green300
+                                      : dark
+                                        ? MD2Colors.red700
+                                        : MD2Colors.red300,
+                                  borderRadius: 12,
+                                  padding: 12,
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  flexWrap: "wrap",
+                                }}
+                              >
+                                <ThemedText
+                                  style={{ fontSize: 24, marginRight: 12 }}
+                                >
+                                  {["A", "B", "C", "D", "E", "F", "G"][index]}
+                                </ThemedText>
+                                <ThemedText
+                                  style={{
+                                    fontSize: 14,
+                                    flexShrink: 1,
+                                    flex: 1,
+                                  }}
+                                >
+                                  {
+                                    questions[currentIndex][
+                                      value as keyof Question
+                                    ]
+                                  }
+                                </ThemedText>
+                                {hasAnswered && (
+                                  <>
+                                    {"spr" in questions[currentIndex] &&
+                                    questions[currentIndex]["spr"] === value ? (
+                                      <Check
+                                        color={
+                                          dark
+                                            ? MD2Colors.green200
+                                            : MD2Colors.green800
+                                        }
+                                      />
+                                    ) : (
+                                      <X
+                                        color={
+                                          dark
+                                            ? MD2Colors.red200
+                                            : MD2Colors.red800
+                                        }
+                                      />
+                                    )}
+                                  </>
                                 )}
-                              </>
-                            )}
-                          </View>
-                        </TouchableOpacity>
-                      ))}
-                    <Button
-                      labelStyle={{ fontFamily: "Inter" }}
-                      mode="contained"
-                      style={{
-                        backgroundColor: "#155dfc",
-                        visibility: hasAnswered ? "visible" : "hidden",
-                        pointerEvents: hasAnswered ? "auto" : "none",
-                        opacity: hasAnswered ? 1 : 0,
-                        marginBottom: 12,
-                      }}
-                      textColor="white"
-                      onPress={() => handleContinue()}
-                    >
-                      Pokračovat
-                    </Button>
+                              </View>
+                            </TouchableOpacity>
+                          ))}
+                        <Button
+                          labelStyle={{ fontFamily: "Inter" }}
+                          mode="contained"
+                          disabled={
+                            selectedAnswers.length !=
+                            questions[currentIndex]["spr"].length
+                          }
+                          style={{
+                            backgroundColor: "#155dfc",
+                            opacity:
+                              selectedAnswers.length !=
+                              questions[currentIndex]["spr"].length
+                                ? 0.5
+                                : 1,
+                            pointerEvents:
+                              selectedAnswers.length !=
+                              questions[currentIndex]["spr"].length
+                                ? "none"
+                                : "auto",
+                            marginBottom: 12,
+                          }}
+                          textColor="white"
+                          onPress={() => {
+                            if (hasAnswered) {
+                              handleContinue();
+                            } else {
+                              if (!("spr" in questions[currentIndex])) return;
+                              const correctAnswers =
+                                questions[currentIndex].spr;
+                              const isCorrect =
+                                Array.isArray(correctAnswers) &&
+                                selectedAnswers.length ===
+                                  correctAnswers.length &&
+                                correctAnswers.every((ans) =>
+                                  selectedAnswers.includes(
+                                    typeof ans === "number"
+                                      ? ans
+                                      : [
+                                          "od1",
+                                          "od2",
+                                          "od3",
+                                          "od4",
+                                          "od5",
+                                          ,
+                                          "od6",
+                                          "od7",
+                                        ].indexOf(ans)
+                                  )
+                                );
+                              handleAnswer(isCorrect);
+                            }
+                          }}
+                        >
+                          {hasAnswered ? "Pokračovat" : "Zkontrolovat"}
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        <ThemedText
+                          style={{ fontSize: 32, marginVertical: 24 }}
+                        >
+                          {questions[currentIndex].ot}
+                        </ThemedText>
+                        {["od1", "od2", "od3", "od4", "od5"]
+                          .filter(
+                            (value) =>
+                              questions[currentIndex][value as keyof Question]
+                          )
+                          .map((value, index) => (
+                            <TouchableOpacity
+                              activeOpacity={0.6}
+                              key={index}
+                              style={{ marginBottom: 12 }}
+                              onPress={() =>
+                                handleAnswer(
+                                  "spr" in questions[currentIndex] &&
+                                    questions[currentIndex]["spr"] === value
+                                )
+                              }
+                            >
+                              <View
+                                style={{
+                                  backgroundColor: !hasAnswered
+                                    ? dark
+                                      ? "#1e293b"
+                                      : MD2Colors.blue100
+                                    : "spr" in questions[currentIndex] &&
+                                        questions[currentIndex]["spr"] === value
+                                      ? dark
+                                        ? MD2Colors.green700
+                                        : MD2Colors.green300
+                                      : dark
+                                        ? MD2Colors.red700
+                                        : MD2Colors.red300,
+                                  borderRadius: 12,
+                                  padding: 12,
+                                  flexDirection: "row",
+                                  alignItems: "center",
+                                  flexWrap: "wrap",
+                                }}
+                              >
+                                <ThemedText
+                                  style={{ fontSize: 24, marginRight: 12 }}
+                                >
+                                  {["A", "B", "C", "D", "E", "F", "G"][index]}
+                                </ThemedText>
+                                <ThemedText
+                                  style={{
+                                    fontSize: 14,
+                                    flexShrink: 1,
+                                    flex: 1,
+                                  }}
+                                >
+                                  {
+                                    questions[currentIndex][
+                                      value as keyof Question
+                                    ]
+                                  }
+                                </ThemedText>
+                                {hasAnswered && (
+                                  <>
+                                    {"spr" in questions[currentIndex] &&
+                                    questions[currentIndex]["spr"] === value ? (
+                                      <Check
+                                        color={
+                                          dark
+                                            ? MD2Colors.green200
+                                            : MD2Colors.green800
+                                        }
+                                      />
+                                    ) : (
+                                      <X
+                                        color={
+                                          dark
+                                            ? MD2Colors.red200
+                                            : MD2Colors.red800
+                                        }
+                                      />
+                                    )}
+                                  </>
+                                )}
+                              </View>
+                            </TouchableOpacity>
+                          ))}
+                        <Button
+                          labelStyle={{ fontFamily: "Inter" }}
+                          mode="contained"
+                          style={{
+                            backgroundColor: "#155dfc",
+                            visibility: hasAnswered ? "visible" : "hidden",
+                            pointerEvents: hasAnswered ? "auto" : "none",
+                            opacity: hasAnswered ? 1 : 0,
+                            marginBottom: 12,
+                          }}
+                          textColor="white"
+                          onPress={() => handleContinue()}
+                        >
+                          Pokračovat
+                        </Button>
+                      </>
+                    )}
                   </>
                 ) : (
                   <>
@@ -623,10 +851,8 @@ const LessonScreen = () => {
           </View>
         )}
       </SafeAreaView>
-    </View>
+    </ScrollView>
   );
 };
 
 export default LessonScreen;
-
-const styles = StyleSheet.create({});

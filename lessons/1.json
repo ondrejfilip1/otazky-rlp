@@ -321,7 +321,7 @@
       "ot": "RCC znamená",
       "od1": "Rescue Coordination Center",
       "od2": "Report & Command Center",
-      "od3": ""
+      "spr": "od1"
     },
     {
       "ot": "PENV znamená:",

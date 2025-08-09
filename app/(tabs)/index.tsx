@@ -5,7 +5,7 @@ import LessonList from "@/utils/LessonList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Brain, GraduationCap } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { useTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -29,7 +29,7 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <View style={{ backgroundColor: colors.background, flex: 1 }}>
+    <ScrollView style={{ backgroundColor: colors.background, flex: 1 }}>
       <SafeAreaView
         style={{
           padding: 16,
@@ -99,10 +99,8 @@ const HomeScreen = () => {
           )}
         </View>
       </SafeAreaView>
-    </View>
+    </ScrollView>
   );
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({});
