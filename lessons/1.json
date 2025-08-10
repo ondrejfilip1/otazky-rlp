@@ -367,6 +367,7 @@
       "od5": "ILS29 circling 11",
       "od6": "VIS",
       "spr": [
+        "od2",
         "od4",
         "od5",
         "od6"
