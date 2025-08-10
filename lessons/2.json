@@ -1,33 +1,305 @@
 {
-  "nazev": "Test",
+  "nazev": "METAR česky",
   "otazky": [
     {
-      "ot": "Otazka",
-      "od1": "Ano",
-      "od2": "Ano",
-      "od3": "Ano",
-      "spr": "od1",
-      "imgPath": "https://media.tenor.com/rcQf2wshw3oAAAAe/cat-von-king-von.png"
+      "ot": "Kódovaná, pravidelná, meteorologická zpráva o aktuálním počasí na letišti.",
+      "od1": "METAR",
+      "od2": "SPECI",
+      "od3": "TAF",
+      "od4": "SIGMET",
+      "spr": "od1"
     },
     {
-      "ot": "Otazka",
-      "od1": "Ano",
-      "od2": "Ano",
-      "spr": "od1",
-      "imgPath": "https://media.tenor.com/rcQf2wshw3oAAAAe/cat-von-king-von.png"
+      "ot": "Kódovaná, nepravidelná, meteorologická zpráva o aktuálním počasí na letišti. Je vydávána meteorologickou služebnou na daném letišti při význačných změnách počasí v době (např.: výskyt bouřky, snížení dohlednosti, změna směru a rychlosti větru)",
+      "od1": "METAR",
+      "od2": "SPECI",
+      "od3": "TAF",
+      "od4": "SIGMET",
+      "spr": "od2"
     },
     {
-      "ot": "Otazka",
-      "od1": "Ano",
-      "od2": "Ano",
-      "od3": "Ano",
-      "od4": "Ano",
-      "od5": "Ano",
-      "spr": "od1",
-      "imgPath": "https://media.tenor.com/rcQf2wshw3oAAAAe/cat-von-king-von.png"
+      "ot": "Kódovaná, pravidelná, meteorologická předpověď počasí pro dané letiště",
+      "od1": "METAR",
+      "od2": "SPECI",
+      "od3": "TAF",
+      "od4": "SIGMET",
+      "spr": "od3"
     },
     {
-      "ot": "Cislo: <NumberInput correct=12 /> Text: <TextInput correct=\"asdsad\" />"
+      "ot": "Krátký TAF se vydává na (neplést s obnovuje)",
+      "od1": "3 hodiny",
+      "od2": "6 hodin",
+      "od3": "9 hodin",
+      "od4": "12 hodiny",
+      "spr": "od3"
+    },
+    {
+      "ot": "Krátký TAF se obnovuje ",
+      "od1": "každou hodinu",
+      "od2": "každé 2 hodiny",
+      "od3": "každé 3 hodiny",
+      "od4": "každých 4/6 hodin podle letiště",
+      "spr": "od3"
+    },
+    {
+      "ot": "Dlouhý TAF se obnovuje každých",
+      "od1": "5 hodin",
+      "od2": "6 hodin",
+      "od3": "8 hodin",
+      "od4": "12 hodin",
+      "spr": "od2"
+    },
+    {
+      "ot": "METAR se vydává",
+      "od1": "vždy s novým ATIS",
+      "od2": "15 minut",
+      "od3": "1x až 2x za hodinu",
+      "od4": "jen při změně počasí, může zůstat celý den",
+      "spr": "od3"
+    },
+    {
+      "ot": "METAR vydaný mimo pravidelný čas se jmenuje",
+      "od1": "METAR",
+      "od2": "SPECI",
+      "spr": "od2"
+    },
+    {
+      "ot": "Platnost dlouhého TAF může být",
+      "od1": "12h",
+      "od2": "18h",
+      "od3": "24h",
+      "od4": "30h",
+      "spr": [
+        "od2",
+        "od3",
+        "od4"
+      ]
+    },
+    {
+      "ot": "Přelož do češtiny: + (...á) <TextInput correct=\"silná\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: (intenzita bez označení) (...á) <TextInput correct=\"mírná\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: - (...á) <TextInput correct=\"slabá\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: SH <TextInput correct=\"přeháňka\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: BL (...ý) <TextInput correct=\"zvířený\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: DR (... ...ý)<TextInput correct=\"nízko zvířený\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: MI <TextInput correct=\"přízemní\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: BC <TextInput correct=\"chuchvalce\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: PR (...é) <TextInput correct=\"částečné\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: FR <TextInput correct=\"namrzající\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: DZ <TextInput correct=\"mrholení\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: RA <TextInput correct=\"déšť\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: SG (...á ...a) <TextInput correct=\"sněhová zrna\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: PL <TextInput correct=\"zmrzlý déšť\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: GR <TextInput correct=\"kroupy\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: GS <TextInput correct=\"krupky\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: FG <TextInput correct=\"mlha\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: BR <TextInput correct=\"kouřmo\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: SA <TextInput correct=\"písek\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: DU <TextInput correct=\"prach\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: HZ <TextInput correct=\"zákal\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: FU <TextInput correct=\"kouř\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: VA (v... ...) <TextInput correct=\"vulkanický popel\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: TS <TextInput correct=\"bouřka\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: PO (...é ...) <TextInput correct=\"písečné víry\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: SQ <TextInput correct=\"húlava\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: FC (2 slova) <TextInput correct=\"nálevkovitý oblak\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: DS (...á ...) <TextInput correct=\"prachová vichřice\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: SS (...á ...) <TextInput correct=\"písečná vichřice\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: VC (předložka+slovo) <TextInput correct=\"v blízkosti\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: FEW (1-2/8) <TextInput correct=\"skoro jasno\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: SCT (3-4/8) <TextInput correct=\"polojasno\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: BKN (5-7/8) [4 slova] <TextInput correct=\"oblačno až skoro zataženo\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: OVC (8/8) <TextInput correct=\"zataženo\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: VV (v... d...) <TextInput correct=\"vertikální dohlednost\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: TCU (v... c...) <TextInput correct=\"věžovitý cumulus\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: BECMG (t... z...) <TextInput correct=\"trvalá změna\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: TEMPO <TextInput correct=\"přechodná změna\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: NSW (bez ... ...) <TextInput correct=\"bez význačného počasí\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: časové upřesnění TL <TextInput correct=\"do\"/>"
+    },
+    {
+      "ot": "METAR končí znamínkem <TextInput correct=\"=\"/>"
+    },
+    {
+      "ot": "Přelož do češtiny: VRB (...ý) <TextInput correct=\"proměnlivý\"/>"
+    },
+    {
+      "ot": "Platnost SIGMET je",
+      "od1": "2 hodiny",
+      "od2": "až 4-6 hodin",
+      "od3": "8 hodin",
+      "od4": "12 hodin",
+      "spr": "od2"
+    },
+    {
+      "ot": "varování pro piloty a dispečery o významných meteorologických jevech, které mohou ohrozit bezpečnost letů",
+      "od1": "METAR",
+      "od2": "TAF",
+      "od3": "SPECI",
+      "od4": "SIGMET",
+      "spr": "od4"
+    },
+    {
+      "ot": "SIGMET se vydává pro oblast",
+      "od1": "TMA nebo CTR",
+      "od2": "FIR nebo jeho části",
+      "od3": "vzdálenosti od navigačního bodu",
+      "od4": "letiště a jeho blízkosti",
+      "spr": "od2"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny OBS (...o) <TextInput correct=\"pozorováno\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny FCST <TextInput correct=\"předpověď\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny BTN <TextInput correct=\"mezi\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny ABV <TextInput correct=\"nad\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny BLW <TextInput correct=\"pod\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny MOV (...í se) <TextInput correct=\"pohybující se\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny NC (...e ...y) <TextInput correct=\"beze změny\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny CNL (...o) <TextInput correct=\"zrušeno\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny TC (...á ...a) <TextInput correct=\"tropická cyklóna\"/>"
+    },
+    {
+      "ot": "[ALL ANSWERS CORRECT] SIGMET č. 6, vydaný Ruským meteorologickým centrem (UNKL – Krasnoyarsk FIR) dne 10. v 10:17 UTC. Platný od 10. v 12:00 UTC do 10. v 15:00 UTC. V jihozápadní části FIR Krasnoyarsk (jihozápadně od linie 55°00′N 088°47′E – 54°00′N 096°00′E – 52°53′N 099°00′E) se předpovídají zabudované bouřky s krupobitím, vrchol oblačnosti do FL380, jev je stacionární, beze změny očekávání.",
+      "od1": "STNR = stacionární",
+      "od2": "EMBD TSGR = skryté bouřky s krupobitím",
+      "od3": "WSRA31 – typ bulletinu podle WMO (WS = SIGMET/AIRMET pro turbulence, konvektivní jevy apod.)",
+      "od4": "Chci si projít ještě jednou = nezaklikávat",
+      "spr": [
+        "od1",
+        "od2",
+        "od3",
+        "od4"
+      ],
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1404100523082252358/image.png?ex=6899f603&is=6898a483&hm=f38e998b26928a1e12310d1ad56143ffeba396454e5c83b63c521ca406fd6cd8&"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny OBSC TS",
+      "od1": "zvláštní bouřky",
+      "od2": "bouřky skryté v jiné oblačnosti",
+      "od3": "bouřky v mlze",
+      "spr": "od2"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny INTSF (z...e) <TextInput correct=\"zesiluje\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny WKN (s...e) <TextInput correct=\"slábne\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny AMD (o...o) <TextInput correct=\"opraveno\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny UPD (a...o) <TextInput correct=\"aktualizováno\"/>"
+    },
+    {
+      "ot": "SIGMET - Přelož do češtiny PSN <TextInput correct=\"poloha\"/>"
+    },
+    {
+      "ot": "SIGMET decode od chatgpt",
+      "od1": "Dál",
+      "od2": "Projít ještě jednou",
+      "spr": "od1",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1404104562838605874/image.png?ex=6899f9c6&is=6898a846&hm=fee757e68bf99d51953ff2d3b2908716447e66e34d3b0663490e37d7f495e4d1&"
+    },
+    {
+      "ot": "SIGMET decode od chatgpt",
+      "od1": "Dál",
+      "od2": "Ještě jednou",
+      "imgPath": "https://cdn.discordapp.com/attachments/1403716907961553028/1404105057749831792/image.png?ex=6899fa3c&is=6898a8bc&hm=2abe5844680fba872dfe11e7807bae3844eeb04e6e21ce4a2de4e41726b32be9&"
     }
   ]
 }
