@@ -33,7 +33,7 @@ const TextInputQuestion = ({
         label="Text"
         value={value}
         onChangeText={handleChange}
-        maxLength={8}
+        maxLength={64}
         outlineStyle={{
           borderColor: showAnswer
             ? isCorrect
