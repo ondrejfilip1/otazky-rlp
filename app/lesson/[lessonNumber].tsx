@@ -189,7 +189,7 @@ const LessonScreen = () => {
 
             elements.push(
               <NumberInput
-                key={`numberinput_${index}`}
+                key={`numberinput_${index}_${currentIndex}`}
                 correct={correctValue}
                 onAnswer={(isCorrect: boolean) => onAnswer(index, isCorrect)}
                 onEmpty={(isEmpty: boolean) => handleInputEmpty(index, isEmpty)}
@@ -237,7 +237,7 @@ const LessonScreen = () => {
 
             elements.push(
               <TextInputQuestion
-                key={`textinput_${index}`}
+                key={`textinput_${index}_${currentIndex}`}
                 correct={correctValue}
                 onAnswer={(isCorrect: boolean) => onAnswer(index, isCorrect)}
                 onEmpty={(isEmpty: boolean) => handleInputEmpty(index, isEmpty)}
