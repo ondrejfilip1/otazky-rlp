@@ -1,3 +1,4 @@
+import DropdownInput from "@/components/DropdownInput";
 import LoadingScreen from "@/components/LoadingScreen";
 import NumberInput from "@/components/NumberInput";
 import TextInputQuestion from "@/components/TextInput";
@@ -50,6 +51,9 @@ const LessonScreen = () => {
   const [correctlyAnswered, setCorrectlyAnswered] = useState(0);
   const [dialogVisible, setDialogVisible] = useState(false);
   const [lessonName, setLessonName] = useState("");
+
+  // dropdown input questions
+  const [isDropDownQuestion, setIsDropDownQuestion] = useState(false);
 
   // input questions
   const [allCorrect, setAllCorrect] = useState(false);
@@ -150,43 +154,14 @@ const LessonScreen = () => {
           currentText = "";
         }
 
+        const index = inputCounter++;
+        let correctValue: string | number | null = null;
+        let options: string[] = [];
+
         if (segment.includes("NumberInput")) {
           const match = segment.match(/correct=(\d+)/);
           if (match) {
-            const correctValue = parseInt(match[1], 10);
-            const index = inputCounter++;
-
-            if (userAnswers.length <= index) {
-              setUserAnswers((prev) => {
-                const newAnswers = [...prev];
-                while (newAnswers.length <= index) {
-                  newAnswers.push(false);
-                }
-                return newAnswers;
-              });
-            }
-
-            if (inputStates.length <= index) {
-              setInputStates((prev) => {
-                const newStates = [...prev];
-                while (newStates.length <= index) {
-                  newStates.push(false);
-                }
-                return newStates;
-              });
-            }
-
-            if (correctAnswers.length <= index) {
-              setCorrectAnswers((prev) => {
-                const newCorrectAnswers = [...prev];
-                while (newCorrectAnswers.length <= index) {
-                  newCorrectAnswers.push("");
-                }
-                newCorrectAnswers[index] = correctValue;
-                return newCorrectAnswers;
-              });
-            }
-
+            correctValue = parseInt(match[1], 10);
             elements.push(
               <NumberInput
                 key={`numberinput_${index}_${currentIndex}`}
@@ -201,46 +176,31 @@ const LessonScreen = () => {
         } else if (segment.includes("TextInput")) {
           const match = segment.match(/correct="([^"]+)"/);
           if (match) {
-            const correctValue = match[1];
-            const index = inputCounter++;
-
-            if (userAnswers.length <= index) {
-              setUserAnswers((prev) => {
-                const newAnswers = [...prev];
-                while (newAnswers.length <= index) {
-                  newAnswers.push(false);
-                }
-                return newAnswers;
-              });
-            }
-
-            if (inputStates.length <= index) {
-              setInputStates((prev) => {
-                const newStates = [...prev];
-                while (newStates.length <= index) {
-                  newStates.push(false);
-                }
-                return newStates;
-              });
-            }
-
-            if (correctAnswers.length <= index) {
-              setCorrectAnswers((prev) => {
-                const newCorrectAnswers = [...prev];
-                while (newCorrectAnswers.length <= index) {
-                  newCorrectAnswers.push("");
-                }
-                newCorrectAnswers[index] = correctValue;
-                return newCorrectAnswers;
-              });
-            }
-
+            correctValue = match[1];
             elements.push(
               <TextInputQuestion
                 key={`textinput_${index}_${currentIndex}`}
                 correct={correctValue}
                 onAnswer={(isCorrect: boolean) => onAnswer(index, isCorrect)}
                 onEmpty={(isEmpty: boolean) => handleInputEmpty(index, isEmpty)}
+                showAnswer={showAnswers}
+                isCorrect={userAnswers[index]}
+              />
+            );
+          }
+        } else if (segment.includes("DropdownInput")) {
+          const correctMatch = segment.match(/correct="([^"]+)"/);
+          const optionsMatch = segment.match(/options="([^"]+)"/);
+          if (correctMatch && optionsMatch) {
+            correctValue = correctMatch[1];
+            options = optionsMatch[1].split(",");
+            elements.push(
+              <DropdownInput
+                key={`dropdown_${index}_${currentIndex}`}
+                correct={correctValue}
+                options={options}
+                onAnswer={(isCorrect) => onAnswer(index, isCorrect)}
+                onEmpty={(isEmpty) => handleInputEmpty(index, isEmpty)}
                 showAnswer={showAnswers}
                 isCorrect={userAnswers[index]}
               />
@@ -260,6 +220,8 @@ const LessonScreen = () => {
       );
     }
 
+    if (currentIndex) {
+    }
     return (
       <View
         style={{
@@ -267,6 +229,9 @@ const LessonScreen = () => {
           flexWrap: "wrap",
           alignItems: "center",
           marginVertical: 24,
+          position: "relative",
+          zIndex: 1000,
+          elevation: 1000
         }}
       >
         {elements}
@@ -517,11 +482,14 @@ const LessonScreen = () => {
                               activeOpacity={0.6}
                               key={index}
                               disabled={
-                                "spr" in questions[currentIndex] &&
-                                Array.isArray(questions[currentIndex]["spr"]) &&
-                                !selectedAnswers.includes(index) &&
-                                questions[currentIndex]["spr"].length <=
-                                  selectedAnswers.length || hasAnswered
+                                ("spr" in questions[currentIndex] &&
+                                  Array.isArray(
+                                    questions[currentIndex]["spr"]
+                                  ) &&
+                                  !selectedAnswers.includes(index) &&
+                                  questions[currentIndex]["spr"].length <=
+                                    selectedAnswers.length) ||
+                                hasAnswered
                               }
                               style={{
                                 opacity:
@@ -597,9 +565,9 @@ const LessonScreen = () => {
                                 {hasAnswered && (
                                   <>
                                     {"spr" in questions[currentIndex] &&
-                                        questions[currentIndex]["spr"].includes(
-                                          `od${index + 1}`
-                                        ) ? (
+                                    questions[currentIndex]["spr"].includes(
+                                      `od${index + 1}`
+                                    ) ? (
                                       <Check
                                         color={
                                           dark
@@ -784,11 +752,7 @@ const LessonScreen = () => {
                   </>
                 ) : (
                   <>
-                    <ThemedText style={{ fontSize: 32, marginVertical: 24 }}>
-                      {renderInputQuestion(
-                        questions[currentIndex as number].ot
-                      )}
-                    </ThemedText>
+                    {renderInputQuestion(questions[currentIndex as number].ot)}
                     <Button
                       labelStyle={{ fontFamily: "Inter" }}
                       mode="contained"

@@ -1,0 +1,9 @@
+{
+  "nazev": "Test",
+  "otazky": [
+    {
+      "ot": "Select the primary color: <DropdownInput correct=\"Blue\" options=\"Red,Blue,Green\">.",
+      "imgPath": "https://paintingsbytimlee.co.uk/rlpobrazky/astel.png"
+    }
+  ]
+}
